@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/recomFragment">
 
+    <fragment
+        android:id="@+id/recomFragment"
+        android:name="com.example.workoutbuddy.RecomFragment"
+        android:label="fragment_recom"
+        tools:layout="@layout/fragment_recom" />
+    <fragment
+        android:id="@+id/pastWorkoutFragment"
+        android:name="com.example.workoutbuddy.PastWorkoutFragment"
+        android:label="fragment_past_workout"
+        tools:layout="@layout/fragment_past_workout" />
+    <fragment
+        android:id="@+id/weeklyPlannerFragment"
+        android:name="com.example.workoutbuddy.WeeklyPlannerFragment"
+        android:label="fragment_weekly_planner"
+        tools:layout="@layout/fragment_weekly_planner" />
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.example.workoutbuddy.PlanFragment"
+        android:label="fragment_plan"
+        tools:layout="@layout/fragment_plan" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.workoutbuddy.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
