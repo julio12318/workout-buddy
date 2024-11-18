@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/to_rec_frag"
+        android:title="All Product" />
+    <item
+        android:id="@+id/to_past_frag"
+        android:title="Search" />
+    <item
+        android:id="@+id/to_future_frag"
+        android:title="All Product" />
+    <item
+        android:id="@+id/to_profile_frag"
+        android:title="All Product" />
+    <item
+        android:id="@+id/to_current_frag"
+        android:title="All Product" />
+</menu>
