@@ -9,25 +9,105 @@
         android:id="@+id/recomFragment"
         android:name="com.example.workoutbuddy.RecomFragment"
         android:label="fragment_recom"
-        tools:layout="@layout/fragment_recom" />
+        tools:layout="@layout/fragment_recom" >
+        <action
+            android:id="@+id/action_recomFragment_to_exerciseSummaryFragment"
+            app:destination="@id/exerciseSummaryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pastWorkoutFragment"
         android:name="com.example.workoutbuddy.PastWorkoutFragment"
         android:label="fragment_past_workout"
-        tools:layout="@layout/fragment_past_workout" />
+        tools:layout="@layout/fragment_past_workout" >
+        <action
+            android:id="@+id/action_pastWorkoutFragment_to_pastWorkoutSummaryFragment"
+            app:destination="@id/pastWorkoutSummaryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/weeklyPlannerFragment"
         android:name="com.example.workoutbuddy.WeeklyPlannerFragment"
         android:label="fragment_weekly_planner"
-        tools:layout="@layout/fragment_weekly_planner" />
+        tools:layout="@layout/fragment_weekly_planner" >
+        <action
+            android:id="@+id/action_weeklyPlannerFragment_to_dayPlanFragment"
+            app:destination="@id/dayPlanFragment" />
+    </fragment>
     <fragment
         android:id="@+id/planFragment"
         android:name="com.example.workoutbuddy.PlanFragment"
         android:label="fragment_plan"
-        tools:layout="@layout/fragment_plan" />
+        tools:layout="@layout/fragment_plan" >
+        <action
+            android:id="@+id/action_planFragment_to_chooseExerciseFragment"
+            app:destination="@id/chooseExerciseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.workoutbuddy.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_interviewFragment"
+            app:destination="@id/interviewFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_focusFragment"
+            app:destination="@id/focusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseSummaryFragment"
+        android:name="com.example.workoutbuddy.ExerciseSummaryFragment"
+        android:label="fragment_exercise_summary"
+        tools:layout="@layout/fragment_exercise_summary" >
+        <action
+            android:id="@+id/action_exerciseSummaryFragment_to_addExerciseFragment"
+            app:destination="@id/addExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addExerciseFragment"
+        android:name="com.example.workoutbuddy.AddExerciseFragment"
+        android:label="fragment_add_exercise"
+        tools:layout="@layout/fragment_add_exercise" /><action android:id="@+id/action_global_recomFragment" app:destination="@id/recomFragment"/>
+    <fragment
+        android:id="@+id/pastWorkoutSummaryFragment"
+        android:name="com.example.workoutbuddy.PastWorkoutSummaryFragment"
+        android:label="fragment_past_workout_summary"
+        tools:layout="@layout/fragment_past_workout_summary" />
+    <fragment
+        android:id="@+id/interviewFragment"
+        android:name="com.example.workoutbuddy.InterviewFragment"
+        android:label="fragment_interview"
+        tools:layout="@layout/fragment_interview" />
+    <fragment
+        android:id="@+id/focusFragment"
+        android:name="com.example.workoutbuddy.FocusFragment"
+        android:label="fragment_focus"
+        tools:layout="@layout/fragment_focus" />
+    <fragment
+        android:id="@+id/chooseExerciseFragment"
+        android:name="com.example.workoutbuddy.ChooseExerciseFragment"
+        android:label="fragment_choose_exercise"
+        tools:layout="@layout/fragment_choose_exercise" >
+        <action
+            android:id="@+id/action_chooseExerciseFragment_to_quickSummaryFragment"
+            app:destination="@id/quickSummaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quickSummaryFragment"
+        android:name="com.example.workoutbuddy.QuickSummaryFragment"
+        android:label="fragment_quick_summary"
+        tools:layout="@layout/fragment_quick_summary" />
+    <fragment
+        android:id="@+id/dayPlanFragment"
+        android:name="com.example.workoutbuddy.DayPlanFragment"
+        android:label="fragment_day_plan"
+        tools:layout="@layout/fragment_day_plan" >
+        <action
+            android:id="@+id/action_dayPlanFragment_to_completeFragment"
+            app:destination="@id/completeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeFragment"
+        android:name="com.example.workoutbuddy.CompleteFragment"
+        android:label="fragment_complete"
+        tools:layout="@layout/fragment_complete" /><action android:id="@+id/action_global_pastWorkoutFragment" app:destination="@id/pastWorkoutFragment"/><action android:id="@+id/action_global_weeklyPlannerFragment" app:destination="@id/weeklyPlannerFragment"/><action android:id="@+id/action_global_planFragment" app:destination="@id/planFragment"/><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
 </navigation>
