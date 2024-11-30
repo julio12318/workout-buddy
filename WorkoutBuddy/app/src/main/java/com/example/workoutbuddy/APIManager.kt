@@ -1,5 +1,7 @@
 package com.example.workoutbuddy
 
-class APIManager (var movieViewModel: WorkoutBuddyViewModel){
+import android.util.Log
+import org.json.JSONObject
 
+class APIManager (var workoutViewModel: WorkoutBuddyViewModel){
 }

@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProfileFragment">
 
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="123dp"
-        android:layout_height="119dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile" />
+    <LinearLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="80dp"> <!-- Add padding to account for the nav bar -->
 
-    <TextView
-        android:id="@+id/name_text"
-        android:layout_width="156dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="52dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="123dp"
+            android:layout_height="119dp"
+            android:layout_marginTop="72dp"
+            android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/level_text"
-        android:layout_width="154dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_text" />
+        <TextView
+            android:id="@+id/name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="52dp"
+            android:textSize="30sp"
+            android:text="FirstName LastName"
+            />
 
-    <TextView
-        android:id="@+id/workout_text"
-        android:layout_width="152dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/level_text" />
+        <TextView
+            android:id="@+id/level_text"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
+            android:text="Current Level: "
+            />
 
-    <Button
-        android:id="@+id/preferences_button"
-        android:layout_width="225dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="20dp"
-        android:text="Edit Preferences"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.216"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_text" />
+        <TextView
+            android:id="@+id/workout_text"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:textSize="30sp"
+            android:text="Currently Working On:"
+            />
 
-    <Button
-        android:id="@+id/interview_button"
-        android:layout_width="222dp"
-        android:layout_height="46dp"
-        android:text="Answer Interview"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="558dp" />
+        <TextView
+            android:id="@+id/workout_list"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:textSize="30sp"
+            android:text="..."
+            />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/preferences_button"
+            android:layout_width="225dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="20dp"
+            android:text="Edit Preferences"
+            />
+
+        <Button
+            android:id="@+id/interview_button"
+            android:layout_width="222dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:text="Answer Interview"
+            />
+
+    </LinearLayout>
+</ScrollView>
