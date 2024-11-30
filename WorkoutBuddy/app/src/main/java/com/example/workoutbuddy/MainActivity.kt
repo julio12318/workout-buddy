@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    val viewModel : WorkoutBuddyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        viewModel.startExercises()
 
         findViewById<BottomNavigationView>(R.id.bottom_menu).setOnItemSelectedListener {
             if (it.itemId==R.id.to_rec_frag) {

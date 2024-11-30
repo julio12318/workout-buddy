@@ -9,4 +9,8 @@ class WorkoutBuddyViewModel : ViewModel() {
     init {
         apiManager.value = APIManager(this)
     }
+
+    fun startExercises() {
+//        apiManager.value?.fetchExercisesByMuscle("serratus anterior");
+    }
 }

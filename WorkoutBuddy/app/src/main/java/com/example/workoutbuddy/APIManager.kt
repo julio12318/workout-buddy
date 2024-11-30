@@ -1,57 +1,73 @@
 package com.example.workoutbuddy
 
 import android.util.Log
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
+import retrofit2.http.Path
+import retrofit2.http.Query
 
-class APIManager(var workoutViewModel: WorkoutBuddyViewModel) {
+class APIManager (var movieViewModel: WorkoutBuddyViewModel){
     private val apiURL = "https://exercisedb.p.rapidapi.com/"
-    private val apiKey = "b511a2ff85msh8ba1b06bf526e8fp165b79jsn670324e2796e"
-    private val apiHost = "exercisedb.p.rapidapi.com"
+    private val apiKey = "3a77f2ee09mshe8f0ccb07284438p1685f2jsn81190152cda8"
 
-    interface ExerciseService {
-        @GET("exercises")
-        fun getExercises(): Call<ResponseBody>
+    interface WorkoutService {
+        @Headers(
+            "x-rapidapi-key: 3a77f2ee09mshe8f0ccb07284438p1685f2jsn81190152cda8",
+            "x-rapidapi-host: exercisedb.p.rapidapi.com"
+        )
+        @GET("exercises?")
+        fun getExercises(
+            @Query("limit") limit : Int,
+            @Query("offset") offset : Int,
+        ) : Call<ResponseBody>
+
+        @Headers(
+            "x-rapidapi-key: 3a77f2ee09mshe8f0ccb07284438p1685f2jsn81190152cda8",
+            "x-rapidapi-host: exercisedb.p.rapidapi.com"
+        )
+        @GET("exercises/target/{target}?")
+        fun getExercisesByMuscle(
+            @Path("target") muscle : String,
+            @Query("limit") limit : Int,
+            @Query("offset") offset : Int,
+        ) : Call<ResponseBody>
     }
 
-    fun fetchExercises() {
-        // Add headers dynamically via an Interceptor
-        val client = OkHttpClient.Builder()
-            .addInterceptor(Interceptor { chain ->
-                val request = chain.request().newBuilder()
-                    .addHeader("x-rapidapi-key", apiKey)
-                    .addHeader("x-rapidapi-host", apiHost)
-                    .build()
-                chain.proceed(request)
-            })
-            .build()
-
+    fun fetchExercises(limit : Int = 10, offset: Int = 0) {
         val retrofit = Retrofit.Builder()
             .baseUrl(apiURL)
-            .client(client)
             .build()
-
-        val service = retrofit.create(ExerciseService::class.java)
-        val call = service.getExercises()
-        call.enqueue(ExerciseCallback())
+        val service = retrofit.create(WorkoutService::class.java)
+        val call = service.getExercises(limit, offset)
+        call.enqueue(WorkoutRequestCallback())
     }
 
-    inner class ExerciseCallback : Callback<ResponseBody> {
+    fun fetchExercisesByMuscle(muscle : String, limit: Int = 10, offset: Int = 0) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(apiURL)
+            .build()
+        val service = retrofit.create(WorkoutService::class.java)
+        val call = service.getExercisesByMuscle(muscle, limit, offset)
+        call.enqueue(WorkoutRequestCallback())
+    }
+
+
+    inner class WorkoutRequestCallback : Callback<ResponseBody> {
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-            if (response.isSuccessful) {
+            if(response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
-                    val jsonString = body.string()
-                    Log.d("apicall", jsonString)
+                    // TODO: Add stuff here
+                    Log.d("asdf", body.string())
                 }
             } else {
-                Log.e("apicall", "API returned an error: ${response.code()}")
+                Log.e("apicall", response.errorBody()!!.string())
             }
         }
 
