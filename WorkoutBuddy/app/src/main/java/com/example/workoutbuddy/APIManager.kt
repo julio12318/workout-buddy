@@ -2,6 +2,8 @@ package com.example.workoutbuddy
 
 import android.util.Log
 import okhttp3.ResponseBody
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,7 +16,10 @@ import retrofit2.http.Query
 
 const val apiKey = "3a77f2ee09mshe8f0ccb07284438p1685f2jsn81190152cda8"
 
-class APIManager (var workoutBuddyViewModel: WorkoutBuddyViewModel){
+
+
+class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
+
     private val apiURL = "https://exercisedb.p.rapidapi.com/"
 
     interface WorkoutService {
@@ -149,13 +154,40 @@ class APIManager (var workoutBuddyViewModel: WorkoutBuddyViewModel){
         call.enqueue(WorkoutRequestCallback())
     }
 
+    fun addRequestedWorkouts(json : String) {
+        val data = JSONArray(json)
+        val workouts = ArrayList<APIWorkoutObject>()
+        for (i in 0..<data.length()) {
+            val workoutData = data.getJSONObject(i)
+            val workoutObject = APIWorkoutObject()
+            workoutObject.bodyPart = workoutData.getString("bodyPart")
+            workoutObject.equipment = workoutData.getString("equipment")
+            workoutObject.gifUrl = workoutData.getString("gifUrl")
+            workoutObject.workoutID = workoutData.getString("id")
+            workoutObject.name = workoutData.getString("name")
+            workoutObject.target = workoutData.getString("target")
+            var dataBuffer = workoutData.getJSONArray("secondaryMuscles")
+            for(j in 0..<dataBuffer.length()) {
+                workoutObject.secondaryMuscles.add(dataBuffer.getString(j))
+            }
+            dataBuffer = workoutData.getJSONArray("instructions")
+            for(j in 0..<dataBuffer.length()) {
+                workoutObject.instructions.add(dataBuffer.getString(j))
+            }
+            workouts.add(workoutObject)
+        }
+        exerciseViewModel.requestedWorkouts.value = workouts
+    }
+
     inner class WorkoutRequestCallback : Callback<ResponseBody> {
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             if(response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
                     // TODO: Add stuff here
-                    Log.d("asdf", body.string())
+                    val responseString = body.string()
+                    Log.d("asdf", responseString)
+                    addRequestedWorkouts(responseString)
                 }
             } else {
                 Log.e("apicall", response.errorBody()!!.string())
