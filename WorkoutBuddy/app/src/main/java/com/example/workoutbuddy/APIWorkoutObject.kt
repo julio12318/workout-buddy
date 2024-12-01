@@ -1,13 +1,12 @@
 package com.example.workoutbuddy
 
-class APIWorkoutObject (
-    val bodyPart : String,
-    val equipment: String,
-    val gifUrl: String,
-    val workoutID: String,
-    val name: String,
-    val target: String,
-    val secondaryMuscles : Array<String>,
-    val instructions : Array<String>
-) {
+class APIWorkoutObject {
+    var bodyPart : String = ""
+    var equipment: String = ""
+    var gifUrl: String = ""
+    var workoutID: String = ""
+    var name: String = ""
+    var target: String = ""
+    var secondaryMuscles : ArrayList<String> = ArrayList<String>()
+    var instructions : ArrayList<String> = ArrayList<String>()
 }
