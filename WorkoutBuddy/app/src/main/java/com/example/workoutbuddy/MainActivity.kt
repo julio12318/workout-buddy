@@ -21,7 +21,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         viewModel.startExercises()
+        viewModel.database1.value = ExerciseDB.getDBObject(applicationContext)
+        viewModel.database2.value = CompletedExercisesDB.getDBObject(applicationContext)
+        viewModel.database3.value = WeeklyScheduleDB.getDBObject(applicationContext)
 
         findViewById<BottomNavigationView>(R.id.bottom_menu).setOnItemSelectedListener {
             if (it.itemId==R.id.to_rec_frag) {

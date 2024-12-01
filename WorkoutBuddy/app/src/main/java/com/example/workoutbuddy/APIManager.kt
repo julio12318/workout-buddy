@@ -14,7 +14,7 @@ import retrofit2.http.Query
 
 const val apiKey = "3a77f2ee09mshe8f0ccb07284438p1685f2jsn81190152cda8"
 
-class APIManager (var movieViewModel: WorkoutBuddyViewModel){
+class APIManager (var workoutBuddyViewModel: WorkoutBuddyViewModel){
     private val apiURL = "https://exercisedb.p.rapidapi.com/"
 
     interface WorkoutService {
