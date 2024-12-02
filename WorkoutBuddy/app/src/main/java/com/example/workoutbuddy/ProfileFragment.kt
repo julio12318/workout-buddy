@@ -5,6 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +26,36 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.startOrGetUser()
+        val curUser = viewModel.user.value
+        view.findViewById<EditText>(R.id.name_text).setText(curUser?.name)
+        val level = curUser?.level
+        view.findViewById<TextView>(R.id.level_text).text = "Current Level: ${level}"
+
+
+        view.findViewById<Button>(R.id.save_button).setOnClickListener {
+            val newName = view.findViewById<EditText>(R.id.name_text).text.toString()
+            if (curUser != null) {
+                viewModel.changeName(curUser.name, newName)
+            }
+
+        }
+
+        view.findViewById<Button>(R.id.preferences_button).setOnClickListener {
+            view.findNavController().navigate(R.id.action_profileFragment_to_focusFragment)
+        }
+        view.findViewById<Button>(R.id.interview_button).setOnClickListener {
+            view.findNavController().navigate(R.id.action_profileFragment_to_interviewFragment)
+        }
+
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

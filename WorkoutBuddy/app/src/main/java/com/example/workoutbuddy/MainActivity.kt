@@ -1,6 +1,7 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,10 +23,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel.startExercises()
+        Log.d("Check 1", "Made it to Step 1")
         viewModel.database1.value = ExerciseDB.getDBObject(applicationContext)
         viewModel.database2.value = CompletedExercisesDB.getDBObject(applicationContext)
         viewModel.database3.value = WeeklyScheduleDB.getDBObject(applicationContext)
+        viewModel.database4.value = UserDB.getDBObject(applicationContext)
+
+        viewModel.startExercises()
 
         findViewById<BottomNavigationView>(R.id.bottom_menu).setOnItemSelectedListener {
             if (it.itemId==R.id.to_rec_frag) {

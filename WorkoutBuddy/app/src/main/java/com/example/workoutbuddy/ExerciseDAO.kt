@@ -7,7 +7,4 @@ import androidx.room.Query
 
 @Dao
 interface ExerciseDAO {
-    @Query("SELECT * FROM exercisetable")
-    fun getAll():List<Exercise>
-
 }

@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import androidx.fragment.app.activityViewModels
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +24,46 @@ class InterviewFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val user = viewModel.user.value
+
+        val q1choice = user?.question1
+        val q2choice = user?.question2
+
+        if (q1choice == "once") {
+            view.findViewById<RadioButton>(R.id.once_a_week).isChecked = true
+        }
+        else if (q1choice == "twice") {
+            view.findViewById<RadioButton>(R.id.twice_a_week).isChecked = true
+        }
+        else if (q1choice == "more") {
+            view.findViewById<RadioButton>(R.id.more_a_week).isChecked = true
+        }
+
+        view.findViewById<EditText>(R.id.editTextNumber).setText(q2choice)
+
+        view.findViewById<Button>(R.id.submit_button).setOnClickListener {
+            var selection1: String
+            if (view.findViewById<RadioButton>(R.id.once_a_week).isChecked) {
+                selection1 = "once"
+            } else if (view.findViewById<RadioButton>(R.id.twice_a_week).isChecked) {
+                selection1 = "twice"
+            } else if (view.findViewById<RadioButton>(R.id.more_a_week).isChecked) {
+                selection1 = "more"
+            } else {
+                selection1 = "none"
+            }
+            var selection2 = view.findViewById<EditText>(R.id.editTextNumber).text.toString()
+            if (user != null) {
+                viewModel.changeQuestions(selection1, selection2, user.name)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

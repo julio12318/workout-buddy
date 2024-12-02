@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [CompletedExercises::class], version = 1)
 abstract class CompletedExercisesDB : RoomDatabase() {
-    abstract fun CompletedExercisesDAO() : CompletedExercisesDAO
+    abstract fun completedExercisesDAO() : CompletedExercisesDAO
 
     companion object {
         private var INSTANT: CompletedExercisesDB? = null

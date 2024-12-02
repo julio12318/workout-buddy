@@ -8,7 +8,7 @@ import com.example.workoutbuddy.WeeklySchedule
 
 @Database(entities = [WeeklySchedule::class], version = 1)
 abstract class WeeklyScheduleDB : RoomDatabase() {
-    abstract fun WeeklyScheduleDAO() : WeeklyScheduleDAO
+    abstract fun weeklyScheduleDAO() : WeeklyScheduleDAO
 
     companion object {
         private var INSTANT: WeeklyScheduleDB? = null

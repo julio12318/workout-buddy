@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface WeeklyScheduleDAO {
-    @Query("SELECT * FROM weeklyscheduletable")
+    @Query("SELECT * FROM WeeklyScheduleTable")
     fun getAll():List<WeeklySchedule>
 
 }
