@@ -23,7 +23,9 @@
         style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:menu="@menu/menu"
-        app:labelVisibilityMode="labeled" />
+        android:background="#98ff98"
+        app:itemTextColor="#000000"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu" />
 
 </LinearLayout>
