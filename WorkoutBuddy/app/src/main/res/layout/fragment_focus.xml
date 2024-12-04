@@ -26,6 +26,9 @@ tools:context=".FocusFragment">
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit" />
+            android:text="Submit"
+            android:backgroundTint="#98ff98"
+            android:textColor="#000000"
+            app:cornerRadius="0dp"/>
     </LinearLayout>
 </ScrollView>
