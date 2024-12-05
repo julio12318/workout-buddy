@@ -28,8 +28,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.database2.value = CompletedExercisesDB.getDBObject(applicationContext)
         viewModel.database3.value = WeeklyScheduleDB.getDBObject(applicationContext)
         viewModel.database4.value = UserDB.getDBObject(applicationContext)
+        viewModel.database5.value = PreferencesDB.getDBObject(applicationContext)
 
-        viewModel.startExercises()
+        viewModel.startExercises("", "")
+        Log.d("Cool Beans 1", "Yes")
+        viewModel.getParts()
+        Log.d("Cool Beans 2", "Yes")
+
 
         findViewById<BottomNavigationView>(R.id.bottom_menu).setOnItemSelectedListener {
             if (it.itemId==R.id.to_rec_frag) {

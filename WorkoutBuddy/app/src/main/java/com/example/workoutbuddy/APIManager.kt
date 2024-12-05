@@ -14,7 +14,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val apiKey = "3a77f2ee09mshe8f0ccb07284438p1685f2jsn81190152cda8"
+const val apiKey = "b511a2ff85msh8ba1b06bf526e8fp165b79jsn670324e2796e"
 
 
 
@@ -30,6 +30,16 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
         )
         @GET("exercises?")
         fun getExercises(
+            @Query("limit") limit : Int,
+            @Query("offset") offset : Int,
+        ) : Call<ResponseBody>
+
+        @Headers(
+            "x-rapidapi-key: $apiKey",
+            "x-rapidapi-host: exercisedb.p.rapidapi.com"
+        )
+        @GET("exercises/bodyPartList?")
+        fun getBodyParts(
             @Query("limit") limit : Int,
             @Query("offset") offset : Int,
         ) : Call<ResponseBody>
@@ -97,6 +107,15 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
         val service = retrofit.create(WorkoutService::class.java)
         val call = service.getExercises(limit, offset)
         call.enqueue(WorkoutRequestCallback())
+    }
+
+    fun fetchBodyParts(limit : Int = 10, offset: Int = 0) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(apiURL)
+            .build()
+        val service = retrofit.create(WorkoutService::class.java)
+        val call = service.getBodyParts(limit, offset)
+        call.enqueue(BodyPartRequestCallback())
     }
 
     // Valid inputs for "muscle": abductors, abs, adductors, biceps, calves, cardiovascular system,
@@ -179,6 +198,18 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
         exerciseViewModel.requestedWorkouts.value = workouts
     }
 
+    fun addBodyParts(json : String) {
+        val data = JSONArray(json)
+        val bodyParts = ArrayList<String>()
+        for (i in 0..<data.length()) {
+            val bodyPart = data.getString(i)
+            Log.d("Body Part", bodyPart)
+            bodyParts.add(bodyPart)
+        }
+        Log.d("SO..", "List Size: ${bodyParts.size}")
+        exerciseViewModel.bodyParts.value = bodyParts
+    }
+
     inner class WorkoutRequestCallback : Callback<ResponseBody> {
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             if(response.isSuccessful) {
@@ -188,6 +219,26 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
                     val responseString = body.string()
                     Log.d("asdf", responseString)
                     addRequestedWorkouts(responseString)
+                }
+            } else {
+                Log.e("apicall", response.errorBody()!!.string())
+            }
+        }
+
+        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            Log.e("apicall", "Request failed: ${t.message}")
+        }
+    }
+
+    inner class BodyPartRequestCallback : Callback<ResponseBody> {
+        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            if(response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    // TODO: Add stuff here
+                    val responseString = body.string()
+                    Log.d("asdf2", responseString)
+                    addBodyParts(responseString)
                 }
             } else {
                 Log.e("apicall", response.errorBody()!!.string())

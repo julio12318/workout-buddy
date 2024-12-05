@@ -1,10 +1,17 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +27,49 @@ class FocusFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    lateinit var recyclerViewManager: LinearLayoutManager
+    lateinit var list_recyclerView: RecyclerView
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        val partList = viewModel.bodyParts.value!!
+        Log.d("Cool Beans 3", "${partList.size}")
+        for (part in partList) {
+            Log.d("Made it to Phase 1", "part")
+            viewModel.getPreferences(part)
+        }
+        viewModel.getAllPreferences()
+
+        val bodyPartList = viewModel.bodyPartList.value!!
+        Log.d("Preference List Size", "${bodyPartList.size}")
+
+
+        list_recyclerView=view.findViewById<RecyclerView>(R.id.part_recyclerview)
+        recyclerViewManager= LinearLayoutManager(context)
+        recyclerViewAdapter=RecyclerViewAdapter(bodyPartList)
+
+        viewModel.bodyPartList.observe(viewLifecycleOwner){
+            recyclerViewAdapter.partList = it
+            recyclerViewAdapter.notifyDataSetChanged()
+        }
+
+        list_recyclerView.apply {
+            layoutManager = recyclerViewManager
+            adapter = recyclerViewAdapter
+        }
+
+        view.findViewById<Button>(R.id.submit_button).setOnClickListener {
+            viewModel.updatePreferences()
+            view.findNavController().navigate(R.id.action_focusFragment_to_profileFragment)
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
