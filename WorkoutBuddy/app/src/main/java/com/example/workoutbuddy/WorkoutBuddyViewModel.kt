@@ -17,6 +17,7 @@ class WorkoutBuddyViewModel : ViewModel() {
     val user = MutableLiveData<User>()
     val bodyParts = MutableLiveData<ArrayList<String>>()
     val bodyPartList = MutableLiveData<ArrayList<Preferences>>()
+    val exercisesNames = MutableLiveData<ArrayList<Exercise>>()
 
 
 
@@ -26,6 +27,7 @@ class WorkoutBuddyViewModel : ViewModel() {
         requestedWorkouts.value = ArrayList<APIWorkoutObject>()
         bodyParts.value = ArrayList<String>()
         bodyPartList.value = ArrayList<Preferences>()
+        exercisesNames.value = ArrayList<Exercise>()
     }
 
     fun startExercises(method: String, attribute: String) {
@@ -40,6 +42,11 @@ class WorkoutBuddyViewModel : ViewModel() {
         Log.d("Announcement", "Body Parts Fetched!")
         Log.d("Size", "Size of List: ${bodyPartList.value?.size}")
 
+    }
+
+    fun addExercise(exercise: Exercise) {
+        database1.value?.exerciseDAO()?.insert(exercise)
+        Log.d("Exercise Time", "${exercise.dateCreated}")
     }
 
 
@@ -93,5 +100,11 @@ class WorkoutBuddyViewModel : ViewModel() {
         for (pref in bodyPartList.value!!) {
             database5.value?.preferencesDAO()?.updatePreferences(pref.name, pref.isChecked)
         }
+    }
+
+    fun getWeekExercises(time: Long) {
+        val exList = database1.value?.exerciseDAO()?.getDateEx(time)
+        exercisesNames.value = (exList as ArrayList<Exercise>?)!!
+        Log.d("Getting Those Days!", "${exercisesNames.value}")
     }
 }

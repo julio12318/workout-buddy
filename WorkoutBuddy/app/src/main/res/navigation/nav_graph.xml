@@ -103,7 +103,11 @@
         android:id="@+id/quickSummaryFragment"
         android:name="com.example.workoutbuddy.QuickSummaryFragment"
         android:label="fragment_quick_summary"
-        tools:layout="@layout/fragment_quick_summary" />
+        tools:layout="@layout/fragment_quick_summary" >
+        <action
+            android:id="@+id/action_quickSummaryFragment_to_planFragment"
+            app:destination="@id/planFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dayPlanFragment"
         android:name="com.example.workoutbuddy.DayPlanFragment"

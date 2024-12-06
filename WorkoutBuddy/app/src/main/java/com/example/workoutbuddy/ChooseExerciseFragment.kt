@@ -9,10 +9,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +46,19 @@ class ChooseExerciseFragment : Fragment() {
 
         val parts = viewModel.bodyParts.value!!
         setupSpinner(view, parts)
+        var date = Date()
+
+        val bundle = arguments
+        if (bundle != null) {
+            // Retrieve values by their keys
+
+            date = bundle.getSerializable("selectedDate") as Date
+            val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
+            val formattedDate = dateFormat.format(date)
+
+            view.findViewById<TextView>(R.id.current_date_text).text = "Choose Exercise For: ${formattedDate}"
+
+        }
 
         val exercises = viewModel.requestedWorkouts.value!!
 
@@ -52,8 +69,10 @@ class ChooseExerciseFragment : Fragment() {
             bundle.putString("gifUrl", exercise.gifUrl)
             bundle.putString("workoutID", exercise.workoutID)
             bundle.putString("name", exercise.name)
+            bundle.putString("target", exercise.target)
             bundle.putStringArrayList("secondaryMuscles", exercise.secondaryMuscles)
             bundle.putStringArrayList("instructions", exercise.instructions)
+            bundle.putSerializable("selectedDate", date)
 
             findNavController().navigate(R.id.action_chooseExerciseFragment_to_quickSummaryFragment, bundle)
         }

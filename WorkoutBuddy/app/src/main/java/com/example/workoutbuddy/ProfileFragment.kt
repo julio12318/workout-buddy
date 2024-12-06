@@ -38,6 +38,18 @@ class ProfileFragment : Fragment() {
         val level = curUser?.level
         view.findViewById<TextView>(R.id.level_text).text = "Current Level: ${level}"
 
+        val prefList = viewModel.bodyPartList.value!!
+        var workLine = ""
+        if (prefList.isNotEmpty()) {
+            workLine += "Currently Working On:\n"
+            for (pref in prefList) {
+                if (pref.isChecked) {
+                    workLine += "${pref.name}\n"
+                }
+            }
+        }
+        view.findViewById<TextView>(R.id.workout_text).text = workLine
+
 
         view.findViewById<Button>(R.id.save_button).setOnClickListener {
             val newName = view.findViewById<EditText>(R.id.name_text).text.toString()

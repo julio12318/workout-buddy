@@ -59,15 +59,6 @@
             android:text="Currently Working On:"
             />
 
-        <TextView
-            android:id="@+id/workout_list"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginTop="24dp"
-            android:textSize="30sp"
-            android:text="..."
-            />
-
         <Button
             android:id="@+id/preferences_button"
             android:layout_width="225dp"

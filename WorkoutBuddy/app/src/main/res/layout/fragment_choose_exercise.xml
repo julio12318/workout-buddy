@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ChooseExerciseFragment">
 
+    <!-- Sort Options -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight=".1">
-
-            <TextView
-                android:id="@+id/sort_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".3"
-                android:text="Body Part:" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/exerciserecyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/sort_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#98ff98"
-            android:text="Submit"
-            android:textColor="#000000"
-            app:cornerRadius="0dp" />
+            android:layout_marginEnd="8dp"
+            android:text="Body Part:"
+            android:textSize="16sp" />
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
-</ScrollView>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/current_date_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Choose Exercise For:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Scrollable RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exerciserecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#98ff98"
+        android:padding="12dp"
+        android:text="Submit"
+        android:textColor="#000000"
+        app:cornerRadius="0dp" />
+
+</LinearLayout>
