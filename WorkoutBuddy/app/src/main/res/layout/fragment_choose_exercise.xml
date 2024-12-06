@@ -31,6 +31,13 @@
     </LinearLayout>
 
     <!-- Title -->
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
     <TextView
         android:id="@+id/current_date_text"
         android:layout_width="match_parent"
@@ -41,6 +48,7 @@
         android:textStyle="bold" />
 
     <!-- Scrollable RecyclerView -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciserecyclerview"
         android:layout_width="match_parent"

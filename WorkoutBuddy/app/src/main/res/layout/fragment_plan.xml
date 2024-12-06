@@ -18,10 +18,22 @@
             android:text="Plan Your Routines:"
             android:textSize="30sp" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
         <CalendarView
             android:id="@+id/plan_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/date_text"
