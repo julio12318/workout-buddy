@@ -11,11 +11,16 @@ class CompletedExercises {
     @PrimaryKey
     var id = UUID.randomUUID()
 
-    var exerciseID = ""
-    var datecompleted = ""
-    var musclegroup = ""
-    var weight = 0
-    var sets = 0
-    var reps = 0
+    var bodyPart = ""
+    var equipment = ""
+    var gifUrl = ""
+    var name = ""
+    var target = ""
+    var secondaryMuscles = ""
+    var instructions = ""
+    var dateCreated: Long = 0
+    var minutes = 0
+    var recommend = true
+    var notes = ""
 
 }

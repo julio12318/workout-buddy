@@ -5,6 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +28,52 @@ class DayPlanFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var recyclerViewAdapter: WeekAdapter
+    lateinit var recyclerViewManager: LinearLayoutManager
+    lateinit var list_recyclerView: RecyclerView
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val bundle = arguments
+        val time = bundle?.getLong("dayTime")!!
+        val date = Date(time)
+        val dateFormat = SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(date)
+        view.findViewById<TextView>(R.id.current_date).text = formattedDate
+        viewModel.getWeekExercises(time)
+        val exercises = viewModel.exercisesNames.value!!
+
+        val click: (Exercise) -> Unit = { exercise ->
+            val bundle = Bundle()
+            bundle.putString("bodyPart", exercise.bodyPart)
+            bundle.putString("equipment", exercise.equipment)
+            bundle.putString("gifUrl", exercise.gifUrl)
+            bundle.putString("name", exercise.name)
+            bundle.putString("target", exercise.target)
+            bundle.putString("secondaryMuscles", exercise.secondaryMuscles)
+            bundle.putString("instructions", exercise.instructions)
+            bundle.putSerializable("selectedDate", time)
+
+            findNavController().navigate(R.id.action_dayPlanFragment_to_completeFragment, bundle)
+        }
+
+        list_recyclerView = view.findViewById(R.id.weekrecyclerview)
+        recyclerViewManager = LinearLayoutManager(context)
+        recyclerViewAdapter = WeekAdapter(exercises, click)
+
+        viewModel.exercisesNames.observe(viewLifecycleOwner) {
+            recyclerViewAdapter.weekList = it
+            recyclerViewAdapter.notifyDataSetChanged()
+        }
+
+        list_recyclerView.apply {
+            layoutManager = recyclerViewManager
+            adapter = recyclerViewAdapter
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,18 +12,19 @@ tools:context=".FocusFragment">
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView37"
+            android:id="@+id/title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="35sp"
             android:text="Choose Body Part You Want To Focus On:" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/part_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Submit"

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +63,7 @@ class InterviewFragment : Fragment() {
             if (user != null) {
                 viewModel.changeQuestions(selection1, selection2, user.name)
             }
+            view.findNavController().navigate(R.id.action_interviewFragment_to_profileFragment)
         }
     }
 

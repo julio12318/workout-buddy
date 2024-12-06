@@ -76,12 +76,20 @@
         android:id="@+id/interviewFragment"
         android:name="com.example.workoutbuddy.InterviewFragment"
         android:label="fragment_interview"
-        tools:layout="@layout/fragment_interview" />
+        tools:layout="@layout/fragment_interview" >
+        <action
+            android:id="@+id/action_interviewFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/focusFragment"
         android:name="com.example.workoutbuddy.FocusFragment"
         android:label="fragment_focus"
-        tools:layout="@layout/fragment_focus" />
+        tools:layout="@layout/fragment_focus" >
+        <action
+            android:id="@+id/action_focusFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chooseExerciseFragment"
         android:name="com.example.workoutbuddy.ChooseExerciseFragment"
@@ -95,7 +103,11 @@
         android:id="@+id/quickSummaryFragment"
         android:name="com.example.workoutbuddy.QuickSummaryFragment"
         android:label="fragment_quick_summary"
-        tools:layout="@layout/fragment_quick_summary" />
+        tools:layout="@layout/fragment_quick_summary" >
+        <action
+            android:id="@+id/action_quickSummaryFragment_to_planFragment"
+            app:destination="@id/planFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dayPlanFragment"
         android:name="com.example.workoutbuddy.DayPlanFragment"

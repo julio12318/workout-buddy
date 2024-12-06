@@ -5,6 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +28,77 @@ class QuickSummaryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val bundle = arguments
+
+        val part = bundle?.getString("bodyPart")!!
+        val equipment = bundle.getString("equipment")!!
+        val gifUrl = bundle.getString("gifUrl")!!
+        val id = bundle.getString("workoutID")!!
+        val name = bundle.getString("name")!!
+        val target = bundle.getString("target")!!
+        val group = bundle.getStringArrayList("secondaryMuscles")!!
+        val instructions = bundle.getStringArrayList("instructions")!!
+        val sendDate = bundle.getSerializable("selectedDate") as Date
+
+
+        var secMuscles = ""
+        for (muscle in group) {
+            secMuscles += muscle
+        }
+
+        var instruct = ""
+        for (ins in instructions) {
+            instruct += ins
+        }
+
+        val calendar = Calendar.getInstance()
+        calendar.time = sendDate
+
+        // Set the time part to 00:00:00.000
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        // Get the new Date object with the time set to 00:00:00.000
+        val updatedSendDate = calendar.time
+
+        val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(updatedSendDate)
+
+        view.findViewById<TextView>(R.id.exercise_date).text = "Choose Exercise For: ${formattedDate}"
+
+        view.findViewById<TextView>(R.id.exercise_name).text = name
+        view.findViewById<TextView>(R.id.exercise_part).text = part
+        view.findViewById<TextView>(R.id.exercise_group).text = secMuscles
+        view.findViewById<TextView>(R.id.exercise_description).text = target
+        view.findViewById<TextView>(R.id.exercise_instructions).text = instruct
+
+        val timeFloat = updatedSendDate.time
+
+
+
+
+        view.findViewById<Button>(R.id.submit_button).setOnClickListener {
+            val exercise = Exercise()
+            exercise.bodyPart = part
+            exercise.equipment = equipment
+            exercise.gifUrl = gifUrl
+            exercise.name = name
+            exercise.target = target
+            exercise.secondaryMuscles = secMuscles
+            exercise.instructions = instruct
+            exercise.dateCreated = timeFloat
+            viewModel.addExercise(exercise)
+            view.findNavController().navigate(R.id.action_quickSummaryFragment_to_planFragment)
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
