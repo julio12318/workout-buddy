@@ -50,12 +50,12 @@ class QuickSummaryFragment : Fragment() {
 
         var secMuscles = ""
         for (muscle in group) {
-            secMuscles += "${muscle}\n"
+            secMuscles += "${muscle}\n "
         }
 
         var instruct = ""
         for (ins in instructions) {
-            instruct += "${ins}\n"
+            instruct += "${ins}\n "
         }
 
         val calendar = Calendar.getInstance()

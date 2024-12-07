@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
@@ -30,14 +31,13 @@ class RecomFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var recyclerViewAdapter: ExerciseAdapter
-    lateinit var recyclerViewManager: LinearLayoutManager
+    lateinit var recyclerViewManager: GridLayoutManager
     lateinit var list_recyclerView: RecyclerView
 
     val viewModel: WorkoutBuddyViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.funny_text).text = "Hello!"
         val partList = viewModel.bodyParts.value!!
         Log.d("Cool Beans 3", "${partList.size}")
         for (part in partList) {
@@ -69,6 +69,19 @@ class RecomFragment : Fragment() {
         Log.d("Gottem 2", "${prefListRecom.size}")
 
         Log.d("Gottem 2.5", "${prefListRecom[0].name}")
+
+        if (prefListRecom[0].isChecked) {
+            val name = prefListRecom[0].name
+            val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
+            val line = "You Like ${nameCap}, Here are some exercises for that body part!"
+            view.findViewById<TextView>(R.id.title_text).text = line
+        }
+        else {
+            val name = prefListRecom[0].name
+            val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
+            val line = "Why don't you try some ${nameCap} exercises!"
+            view.findViewById<TextView>(R.id.title_text).text = line
+        }
 
 
         viewModel.startExercises("part", prefListRecom[0].name)
@@ -107,7 +120,7 @@ class RecomFragment : Fragment() {
             }
 
             list_recyclerView = view.findViewById(R.id.recomrecyclerview)
-            recyclerViewManager = LinearLayoutManager(context)
+            recyclerViewManager = GridLayoutManager(context, 2)
             recyclerViewAdapter = ExerciseAdapter(specList, click)
 
             list_recyclerView.apply {

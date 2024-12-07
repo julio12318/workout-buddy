@@ -13,7 +13,7 @@ interface CompletedExercisesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(completedExercise: CompletedExercises)
 
-    @Query("SELECT DISTINCT dateCreated FROM CompletedExercisesTable ORDER BY dateCreated")
+    @Query("SELECT DISTINCT dateCreated FROM CompletedExercisesTable ORDER BY dateCreated DESC")
     fun getCompDate():List<Long>
 
     @Query("SELECT * FROM CompletedExercisesTable WHERE dateCreated=:date")
@@ -24,4 +24,10 @@ interface CompletedExercisesDAO {
 
     @Query("SELECT * FROM CompletedExercisesTable WHERE bodyPart=:part")
     fun getPart(part: String):List<CompletedExercises>
+
+    @Query("SELECT DISTINCT rating FROM CompletedExercisesTable ORDER BY ratingNum")
+    fun getCompRating():List<String>
+
+    @Query("SELECT * FROM CompletedExercisesTable WHERE rating=:rating")
+    fun getRating(rating: String):List<CompletedExercises>
 }

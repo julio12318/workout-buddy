@@ -17,8 +17,10 @@ class ExerciseAdapter(
 
     class ExerciseViewHolder(val viewItem: View): RecyclerView.ViewHolder(viewItem){
         fun bind(exercise:APIWorkoutObject, click:(APIWorkoutObject)->Unit){
-            viewItem.findViewById<TextView>(R.id.name_text).text=exercise.name
-            viewItem.findViewById<TextView>(R.id.part_text).text=exercise.bodyPart
+            val nameCap = "${exercise.name.split(" ").joinToString(" ") { it.capitalize() }}"
+            viewItem.findViewById<TextView>(R.id.name_text).text=nameCap
+            val bodyPartCap = "${exercise.bodyPart.split(" ").joinToString(" ") { it.capitalize() }}"
+            viewItem.findViewById<TextView>(R.id.part_text).text=bodyPartCap
             val gifView = viewItem.findViewById<ImageView>(R.id.image)
             Glide.with(viewItem.context).load(exercise.gifUrl).into(gifView)
             viewItem.setOnClickListener {

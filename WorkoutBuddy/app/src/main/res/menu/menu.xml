@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/to_rec_frag"
-        android:title="Recommendations" />
+        android:title="Recomm." />
     <item
         android:id="@+id/to_past_frag"
-        android:title="Past Workouts" />
+        android:title="Past W.O." />
     <item
         android:id="@+id/to_week_frag"
-        android:title="Weekly Planner" />
+        android:title="Planner" />
     <item
         android:id="@+id/to_future_frag"
-        android:title="Create Planner" />
+        android:title="Create" />
     <item
         android:id="@+id/to_profile_frag"
         android:title="Profile" />

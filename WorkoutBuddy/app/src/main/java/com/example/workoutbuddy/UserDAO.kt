@@ -18,4 +18,7 @@ interface UserDAO {
 
     @Query("UPDATE UserTable SET question1 = :answer1, question2 = :answer2 WHERE name = :name")
     fun updateQuestions(answer1: String, answer2: String, name: String)
+
+    @Query("UPDATE UserTable SET points = :points")
+    fun updatePoints(points: Int)
 }

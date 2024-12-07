@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -34,7 +35,7 @@ class ChooseExerciseFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var recyclerViewAdapter: ExerciseAdapter
-    lateinit var recyclerViewManager: LinearLayoutManager
+    lateinit var recyclerViewManager: GridLayoutManager
     lateinit var list_recyclerView: RecyclerView
 
     val viewModel: WorkoutBuddyViewModel by activityViewModels()
@@ -82,7 +83,7 @@ class ChooseExerciseFragment : Fragment() {
         }
 
         list_recyclerView = view.findViewById(R.id.exerciserecyclerview)
-        recyclerViewManager = LinearLayoutManager(context)
+        recyclerViewManager = GridLayoutManager(context, 2)
         recyclerViewAdapter = ExerciseAdapter(exercises, click)
 
         viewModel.requestedWorkouts.observe(viewLifecycleOwner) {

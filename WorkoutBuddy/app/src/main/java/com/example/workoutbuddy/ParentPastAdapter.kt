@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -36,7 +37,7 @@ class ParentPastAdapter(
 
 
             val childRecyclerView = viewItem.findViewById<RecyclerView>(R.id.itemrecyclerview)
-            val recyclerViewManager = LinearLayoutManager(viewItem.context)
+            val recyclerViewManager = GridLayoutManager(viewItem.context,2)
             val recyclerViewAdapter = ChildPastAdapter(parent.comExerciseList, click)
 
             childRecyclerView.apply {

@@ -1,6 +1,7 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,19 +43,48 @@ class PastWorkoutSummaryFragment : Fragment() {
         val group = bundle.getString("secondaryMuscles")!!
         val instructions = bundle.getString("instructions")!!
         val date = bundle.getLong("selectedDate")
+        val recommend = bundle.getBoolean("recommend")
+        val rating = bundle.getString("rating")
+        val minutes = bundle.getString("minutes")
+        val imageURL = bundle.getString("imageURL")
+
+        Log.d("Gotcha Image", imageURL!!)
 
         val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
         val formattedDate = dateFormat.format(date)
 
-        view.findViewById<TextView>(R.id.exercise_date).text = formattedDate
-
-        view.findViewById<TextView>(R.id.exercise_name).text = name
-        view.findViewById<TextView>(R.id.exercise_part).text = part
-        view.findViewById<TextView>(R.id.exercise_group).text = group
-        view.findViewById<TextView>(R.id.exercise_description).text = target
-        view.findViewById<TextView>(R.id.exercise_instructions).text = instructions
         val gifView = view.findViewById<ImageView>(R.id.exercise_image)
         Glide.with(view.context).load(gifUrl).into(gifView)
+
+        view.findViewById<TextView>(R.id.exercise_date).text = formattedDate
+        val imageView = view.findViewById<ImageView>(R.id.exercise_image2)
+
+
+        Glide.with(requireContext())
+            .load(imageURL)
+            .placeholder(R.drawable.profile) // Show a placeholder if image is missing
+            .error(R.drawable.profile)       // Show an error image if the file is deleted
+            .into(imageView)
+
+        val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_name).text = nameCap
+        val partCap = "${part.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_part).text = partCap
+        val groupCap = "${group.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_group).text = groupCap
+        val targetCap = "${target.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_description).text = targetCap
+        val instructCap = "${instructions.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_instructions).text = instructCap
+        view.findViewById<TextView>(R.id.exercise_rating).text = "Rating: $rating}"
+        view.findViewById<TextView>(R.id.exercise_time).text = "You Worked Out for ${minutes} minutes"
+        if (recommend) {
+            view.findViewById<TextView>(R.id.exercise_recommend).text = "Recommend"
+        }
+        else {
+            view.findViewById<TextView>(R.id.exercise_recommend).text = "Don't Recommend"
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

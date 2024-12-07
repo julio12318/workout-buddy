@@ -1,6 +1,7 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,10 +33,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.startOrGetUser()
         val curUser = viewModel.user.value
         view.findViewById<EditText>(R.id.name_text).setText(curUser?.name)
-        val level = curUser?.level
+        Log.d("Current Points", "${curUser?.points}")
+        val level = (curUser?.points)!! / 100
         view.findViewById<TextView>(R.id.level_text).text = "Current Level: ${level}"
 
         val prefList = viewModel.bodyPartList.value!!
@@ -44,6 +45,7 @@ class ProfileFragment : Fragment() {
             workLine += "Currently Working On:\n"
             for (pref in prefList) {
                 if (pref.isChecked) {
+                    val prefCap = pref.name.split(" ").joinToString(" ") { it.capitalize() }
                     workLine += "${pref.name}\n"
                 }
             }

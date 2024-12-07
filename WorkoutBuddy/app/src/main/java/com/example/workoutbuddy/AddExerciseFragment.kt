@@ -53,6 +53,7 @@ class AddExerciseFragment : Fragment() {
 
         // Get the current date
         val currentDate = Calendar.getInstance()
+        selectedDate = Calendar.getInstance()
         calendarView.minDate = currentDate.timeInMillis // Restrict past dates
 
         // Set the initial date text to today's date

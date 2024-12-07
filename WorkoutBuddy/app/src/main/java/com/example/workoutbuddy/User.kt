@@ -9,7 +9,6 @@ class User() {
     @PrimaryKey
     var name = ""
     var points = 0
-    var level = points / 100
     var question1 = ""
     var question2 = ""
 }

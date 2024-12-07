@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D3D3D3"
 
     android:fillViewport="true"
 
@@ -14,7 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/exercise_date"
@@ -38,6 +40,12 @@
 
         <ImageView
             android:id="@+id/exercise_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/profile" />
+
+        <ImageView
+            android:id="@+id/exercise_image2"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/profile" />

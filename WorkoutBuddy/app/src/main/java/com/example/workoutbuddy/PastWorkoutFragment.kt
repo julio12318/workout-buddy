@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -68,6 +69,11 @@ class PastWorkoutFragment : Fragment() {
             bundle.putString("secondaryMuscles", exercise.secondaryMuscles)
             bundle.putString("instructions", exercise.instructions)
             bundle.putLong("selectedDate", exercise.dateCreated)
+            bundle.putBoolean("recommend", exercise.recommend)
+            bundle.putString("minutes", exercise.minutes)
+            bundle.putString("rating", exercise.rating)
+            bundle.putString("imageURL", exercise.imageURL)
+
 
             findNavController().navigate(R.id.action_pastWorkoutFragment_to_pastWorkoutSummaryFragment, bundle)
         }

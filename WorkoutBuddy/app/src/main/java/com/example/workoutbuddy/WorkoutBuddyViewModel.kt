@@ -130,6 +130,13 @@ class WorkoutBuddyViewModel : ViewModel() {
         finish.value = 1
     }
 
+    fun addPoints() {
+        val user = user.value!!
+        val currentPoints = user.points
+        Log.d("Current Points", currentPoints.toString())
+        database4.value?.userDAO()?.updatePoints(currentPoints + 100)
+    }
+
     fun getQualities(quality: String) {
         if (quality == "Date") {
             val dateList = database2.value?.completedExercisesDAO()?.getCompDate()
@@ -154,6 +161,20 @@ class WorkoutBuddyViewModel : ViewModel() {
             val createParents = ArrayList<ParentItem>()
             for (item in items){
                 val qualList = database2.value?.completedExercisesDAO()?.getPart(item)
+                val qL2 = (qualList as ArrayList<CompletedExercises>)
+                val pItem = ParentItem()
+                pItem.title = item
+                pItem.comExerciseList = qL2
+                createParents.add(pItem)
+            }
+            parentObjects.value = createParents
+        }
+        else if (quality == "Rating") {
+            val ratingLt = database2.value?.completedExercisesDAO()?.getCompRating()
+            val items = (ratingLt as ArrayList<String>?)!!
+            val createParents = ArrayList<ParentItem>()
+            for (item in items){
+                val qualList = database2.value?.completedExercisesDAO()?.getRating(item)
                 val qL2 = (qualList as ArrayList<CompletedExercises>)
                 val pItem = ParentItem()
                 pItem.title = item

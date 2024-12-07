@@ -34,7 +34,6 @@ class ExerciseSummaryFragment : Fragment() {
         val bodyPart = bundle?.getString("bodyPart")!!
         val equipment = bundle.getString("equipment")!!
         val gifUrl = bundle.getString("gifUrl")!!
-        val workoutID = bundle.getString("workoutID")!!
         val name = bundle.getString("name")!!
         val target = bundle.getString("target")!!
         val secondaryMuscles = bundle.getStringArrayList("secondaryMuscles")!!
@@ -42,7 +41,7 @@ class ExerciseSummaryFragment : Fragment() {
 
         var secMuscles = ""
         for (muscle in secondaryMuscles) {
-            secMuscles += "${muscle}\n"
+            secMuscles += "${muscle}\n "
         }
 
         var instruct = ""
@@ -50,24 +49,30 @@ class ExerciseSummaryFragment : Fragment() {
             instruct += "${ins}\n"
         }
 
-        view.findViewById<TextView>(R.id.exercise_name).text = name
-        view.findViewById<TextView>(R.id.exercise_part).text = bodyPart
-        view.findViewById<TextView>(R.id.exercise_group).text = secMuscles
+        val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_name).text = nameCap
+
+
+        val bodyPartCap = "Body Part: ${bodyPart.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_part).text = bodyPartCap
+        val secMuscCap = "Additional Muslces:\n${secMuscles.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_group).text = secMuscCap
         val gifView = view.findViewById<ImageView>(R.id.exercise_image)
         Glide.with(view.context).load(gifUrl).into(gifView)
-        view.findViewById<TextView>(R.id.exercise_description).text = target
-        view.findViewById<TextView>(R.id.exercise_instructions).text = instruct
+        val targetCap = "Targeted Muscle:\n${target.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_description).text = targetCap
+
+        view.findViewById<TextView>(R.id.exercise_instructions).text = "Instructions:\n${instruct}"
 
         view.findViewById<Button>(R.id.add_button).setOnClickListener {
             val bundle = Bundle()
-
-            val bodyPart = bundle.putString("bodyPart", bodyPart)
-            val equipment = bundle.putString("equipment", equipment)
-            val gifUrl = bundle.putString("gifUrl", gifUrl)
-            val name = bundle.putString("name", name)
-            val target = bundle.putString("target", target)
-            val secondaryMuscles = bundle.putString("secondaryMuscles", secMuscles)
-            val instructions = bundle.putString("instructions", instruct)
+            bundle.putString("bodyPart", bodyPart)
+            bundle.putString("equipment", equipment)
+            bundle.putString("gifUrl", gifUrl)
+            bundle.putString("name", name)
+            bundle.putString("target", target)
+            bundle.putString("secondaryMuscles", secMuscles)
+            bundle.putString("instructions", instruct)
 
             view.findNavController().navigate(R.id.action_exerciseSummaryFragment_to_addExerciseFragment, bundle)
 

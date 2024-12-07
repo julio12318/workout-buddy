@@ -23,5 +23,7 @@ class CompletedExercises {
     var recommend = true
     var notes = ""
     var rating = ""
+    var ratingNum = 0
+    var imageURL = ""
 
 }
