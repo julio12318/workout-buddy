@@ -5,6 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +26,36 @@ class PastWorkoutSummaryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val bundle = arguments
+
+        val part = bundle?.getString("bodyPart")!!
+        val equipment = bundle.getString("equipment")!!
+        val gifUrl = bundle.getString("gifUrl")!!
+        val name = bundle.getString("name")!!
+        val target = bundle.getString("target")!!
+        val group = bundle.getString("secondaryMuscles")!!
+        val instructions = bundle.getString("instructions")!!
+        val date = bundle.getLong("selectedDate")
+
+        val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(date)
+
+        view.findViewById<TextView>(R.id.exercise_date).text = formattedDate
+
+        view.findViewById<TextView>(R.id.exercise_name).text = name
+        view.findViewById<TextView>(R.id.exercise_part).text = part
+        view.findViewById<TextView>(R.id.exercise_group).text = group
+        view.findViewById<TextView>(R.id.exercise_description).text = target
+        view.findViewById<TextView>(R.id.exercise_instructions).text = instructions
+        val gifView = view.findViewById<ImageView>(R.id.exercise_image)
+        Glide.with(view.context).load(gifUrl).into(gifView)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

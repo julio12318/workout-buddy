@@ -63,7 +63,7 @@ class InterviewFragment : Fragment() {
             if (user != null) {
                 viewModel.changeQuestions(selection1, selection2, user.name)
             }
-            view.findNavController().navigate(R.id.action_interviewFragment_to_profileFragment)
+            view.findNavController().navigate(R.id.action_global_profileFragment)
         }
     }
 

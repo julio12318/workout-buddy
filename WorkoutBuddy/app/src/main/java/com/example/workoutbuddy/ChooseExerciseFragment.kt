@@ -60,6 +60,10 @@ class ChooseExerciseFragment : Fragment() {
 
         }
 
+        val spinner = view.findViewById<Spinner>(R.id.spinner)
+        val selectedString = spinner.selectedItem as String
+        viewModel.startExercises("part", selectedString)
+
         val exercises = viewModel.requestedWorkouts.value!!
 
         val click: (APIWorkoutObject) -> Unit = { exercise ->

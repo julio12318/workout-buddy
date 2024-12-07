@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,67 +7,53 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/exercise_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ExerciseName" />
+            android:textSize="15sp"
+            android:text="" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/exercise_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date" />
+            android:textSize="30sp"
+            android:text="This is the Name of the Exercise:" />
+
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/profile" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/exercise_part"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Exercise" />
+            android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView30"
+            android:id="@+id/exercise_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Image Goes Here" />
+            android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/exercise_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Details:" />
+            android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/exercise_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Details Go Here" />
+            android:text="TextView" />
 
-        <TextView
-            android:id="@+id/textView33"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quality of Work Out:" />
-
-        <TextView
-            android:id="@+id/textView34"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quality Goes Here" />
-
-        <TextView
-            android:id="@+id/textView35"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Time to Complete" />
-
-        <TextView
-            android:id="@+id/textView36"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Time Goes Here" />
     </LinearLayout>
-</FrameLayout>
+</ScrollView>

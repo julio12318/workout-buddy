@@ -78,6 +78,7 @@ class WeeklyPlannerFragment : Fragment() {
             viewModel.getWeekExercises(time)
             val bundle = Bundle()
             bundle.putLong("dayTime", time)
+            Log.d("Week Time", time.toString())
             view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
         }
 

@@ -110,11 +110,15 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
     }
 
     fun fetchBodyParts(limit : Int = 10, offset: Int = 0) {
+        Log.d("Wahoo!","Wahoo1!")
         val retrofit = Retrofit.Builder()
             .baseUrl(apiURL)
             .build()
+        Log.d("Wahoo!","Wahoo2!")
         val service = retrofit.create(WorkoutService::class.java)
+        Log.d("Wahoo!","Wahoo3!")
         val call = service.getBodyParts(limit, offset)
+        Log.d("Wahoo!","Wahoo!")
         call.enqueue(BodyPartRequestCallback())
     }
 
@@ -195,7 +199,9 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
             }
             workouts.add(workoutObject)
         }
+        Log.d("Gottem 2.7", "${workouts.size}")
         exerciseViewModel.requestedWorkouts.value = workouts
+        Log.d("Gottem 2.8", "${exerciseViewModel.requestedWorkouts.value?.size}")
     }
 
     fun addBodyParts(json : String) {
@@ -208,14 +214,20 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
         }
         Log.d("SO..", "List Size: ${bodyParts.size}")
         exerciseViewModel.bodyParts.value = bodyParts
+        if (exerciseViewModel.finish.value != 1) {
+            exerciseViewModel.finish.value = 1
+        }
     }
 
     inner class WorkoutRequestCallback : Callback<ResponseBody> {
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             if(response.isSuccessful) {
+                Log.d("Wahoo!", "Wahoo!5")
                 val body = response.body()
+                Log.d("Wahoo!", "Wahoo!6")
                 if (body != null) {
                     // TODO: Add stuff here
+                    Log.d("Wahoo!", "Wahoo!7")
                     val responseString = body.string()
                     Log.d("asdf", responseString)
                     addRequestedWorkouts(responseString)
@@ -233,16 +245,22 @@ class APIManager (var exerciseViewModel: WorkoutBuddyViewModel){
     inner class BodyPartRequestCallback : Callback<ResponseBody> {
         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
             if(response.isSuccessful) {
+                Log.d("Wahoo!", "Wahoo!5")
                 val body = response.body()
+                Log.d("Wahoo!", "Wahoo!6")
                 if (body != null) {
+                    Log.d("Wahoo!", "Wahoo!7")
                     // TODO: Add stuff here
                     val responseString = body.string()
                     Log.d("asdf2", responseString)
                     addBodyParts(responseString)
                 }
-            } else {
+            }
+            else {
+                Log.d("DimmiDarn!", "Wahoo!7")
                 Log.e("apicall", response.errorBody()!!.string())
             }
+
         }
 
         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

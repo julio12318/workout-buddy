@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import java.util.UUID
 
 @Dao
 interface ExerciseDAO {
@@ -15,4 +16,7 @@ interface ExerciseDAO {
 
     @Query("SELECT * FROM ExerciseTable WHERE dateCreated=:date")
     fun getDateEx(date: Long):List<Exercise>
+
+    @Query("DELETE FROM ExerciseTable WHERE id==:id")
+    fun delete(id: UUID)
 }

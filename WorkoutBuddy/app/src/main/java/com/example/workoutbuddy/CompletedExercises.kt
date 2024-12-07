@@ -19,8 +19,9 @@ class CompletedExercises {
     var secondaryMuscles = ""
     var instructions = ""
     var dateCreated: Long = 0
-    var minutes = 0
+    var minutes = ""
     var recommend = true
     var notes = ""
+    var rating = ""
 
 }

@@ -1,10 +1,18 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +29,96 @@ class RecomFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var recyclerViewAdapter: ExerciseAdapter
+    lateinit var recyclerViewManager: LinearLayoutManager
+    lateinit var list_recyclerView: RecyclerView
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<TextView>(R.id.funny_text).text = "Hello!"
+        val partList = viewModel.bodyParts.value!!
+        Log.d("Cool Beans 3", "${partList.size}")
+        for (part in partList) {
+            Log.d("Made it to Phase 1", "part")
+            viewModel.getPreferences(part)
+        }
+        viewModel.getAllPreferences()
+
+        val prefList = viewModel.bodyPartList.value!!
+        Log.d("Gottem 1", "${prefList.size}")
+        val randomNumbers = mutableSetOf<Int>()
+
+
+        while (randomNumbers.size < 1) {
+            // Generate a random index
+            val randomIndex = Random.nextInt(prefList.size)
+            randomNumbers.add(randomIndex)  // Ensure uniqueness by adding to a set
+        }
+
+        // Convert the set to a list if needed
+        val randomIndicesList = randomNumbers.toList()
+
+        val prefListRecom = ArrayList<Preferences>()
+
+        for (index in randomIndicesList) {
+            prefListRecom.add(prefList[index])
+        }
+
+        Log.d("Gottem 2", "${prefListRecom.size}")
+
+        Log.d("Gottem 2.5", "${prefListRecom[0].name}")
+
+
+        viewModel.startExercises("part", prefListRecom[0].name)
+
+        viewModel.requestedWorkouts.observe(viewLifecycleOwner) {
+            var recomExercises = viewModel.requestedWorkouts.value!!
+            Log.d("Gottem 3", "${recomExercises.size}")
+
+
+            val randomNumbers2 = mutableSetOf<Int>()
+
+            while (randomNumbers2.size < 8 && randomNumbers2.size < recomExercises.size) {
+                // Generate a random index
+                val randomIndex = Random.nextInt(recomExercises.size)
+                randomNumbers2.add(randomIndex)  // Ensure uniqueness by adding to a set
+            }
+
+            var specList = ArrayList<APIWorkoutObject>()
+            for (index in randomNumbers2) {
+                specList.add(recomExercises[index])
+            }
+            Log.d("Gottem 3.5", "${specList}")
+
+            val click: (APIWorkoutObject) -> Unit = { exercise ->
+                val bundle = Bundle()
+                bundle.putString("bodyPart", exercise.bodyPart)
+                bundle.putString("equipment", exercise.equipment)
+                bundle.putString("gifUrl", exercise.gifUrl)
+                bundle.putString("workoutID", exercise.workoutID)
+                bundle.putString("name", exercise.name)
+                bundle.putString("target", exercise.target)
+                bundle.putStringArrayList("secondaryMuscles", exercise.secondaryMuscles)
+                bundle.putStringArrayList("instructions", exercise.instructions)
+
+                findNavController().navigate(R.id.action_recomFragment_to_exerciseSummaryFragment, bundle)
+            }
+
+            list_recyclerView = view.findViewById(R.id.recomrecyclerview)
+            recyclerViewManager = LinearLayoutManager(context)
+            recyclerViewAdapter = ExerciseAdapter(specList, click)
+
+            list_recyclerView.apply {
+                layoutManager = recyclerViewManager
+                adapter = recyclerViewAdapter
+            }
+        }
+
+
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

@@ -3,6 +3,7 @@ package com.example.workoutbuddy
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.UUID
 
 class WorkoutBuddyViewModel : ViewModel() {
     val apiManager = MutableLiveData<APIManager>()
@@ -19,6 +20,10 @@ class WorkoutBuddyViewModel : ViewModel() {
     val bodyPartList = MutableLiveData<ArrayList<Preferences>>()
     val exercisesNames = MutableLiveData<ArrayList<Exercise>>()
 
+    val parentObjects = MutableLiveData<ArrayList<ParentItem>>()
+
+    val finish = MutableLiveData<Int>()
+
 
 
 
@@ -28,25 +33,38 @@ class WorkoutBuddyViewModel : ViewModel() {
         bodyParts.value = ArrayList<String>()
         bodyPartList.value = ArrayList<Preferences>()
         exercisesNames.value = ArrayList<Exercise>()
+
+        parentObjects.value = ArrayList<ParentItem>()
+        finish.value = 0
     }
 
     fun startExercises(method: String, attribute: String) {
         if (method == "part") {
+            Log.d("Gottem 2.6", attribute)
             apiManager.value?.fetchExercisesByBodyPart(attribute)
         }
 //        apiManager.value?.fetchExercisesByMuscle("serratus anterior");
     }
 
     fun getParts() {
+        Log.d("How Lucky", "Let's Go")
         apiManager.value?.fetchBodyParts()
         Log.d("Announcement", "Body Parts Fetched!")
-        Log.d("Size", "Size of List: ${bodyPartList.value?.size}")
+        Log.d("Size", "Size of List: ${bodyParts.value?.size}")
 
     }
 
     fun addExercise(exercise: Exercise) {
         database1.value?.exerciseDAO()?.insert(exercise)
         Log.d("Exercise Time", "${exercise.dateCreated}")
+    }
+
+    fun deleteExercise(id: UUID) {
+        database1.value?.exerciseDAO()?.delete(id)
+    }
+
+    fun addCompletedExercise(completedExercise: CompletedExercises) {
+        database2.value?.completedExercisesDAO()?.insert(completedExercise)
     }
 
 
@@ -106,5 +124,43 @@ class WorkoutBuddyViewModel : ViewModel() {
         val exList = database1.value?.exerciseDAO()?.getDateEx(time)
         exercisesNames.value = (exList as ArrayList<Exercise>?)!!
         Log.d("Getting Those Days!", "${exercisesNames.value}")
+    }
+
+    fun updateInitiate() {
+        finish.value = 1
+    }
+
+    fun getQualities(quality: String) {
+        if (quality == "Date") {
+            val dateList = database2.value?.completedExercisesDAO()?.getCompDate()
+            val dates = (dateList as ArrayList<Long>?)!!
+            val createParents = ArrayList<ParentItem>()
+            for (date in dates){
+                Log.d("Long Date", "${date}")
+                val dateSt = date.toString()
+                val qualList = database2.value?.completedExercisesDAO()?.getDate(date)
+                val qL2 = (qualList as ArrayList<CompletedExercises>)
+                val pItem = ParentItem()
+                pItem.title = dateSt
+                pItem.comExerciseList = qL2
+                createParents.add(pItem)
+            }
+            parentObjects.value = createParents
+
+        }
+        else if (quality == "Part") {
+            val partLt = database2.value?.completedExercisesDAO()?.getCompPart()
+            val items = (partLt as ArrayList<String>?)!!
+            val createParents = ArrayList<ParentItem>()
+            for (item in items){
+                val qualList = database2.value?.completedExercisesDAO()?.getPart(item)
+                val qL2 = (qualList as ArrayList<CompletedExercises>)
+                val pItem = ParentItem()
+                pItem.title = item
+                pItem.comExerciseList = qL2
+                createParents.add(pItem)
+            }
+            parentObjects.value = createParents
+        }
     }
 }

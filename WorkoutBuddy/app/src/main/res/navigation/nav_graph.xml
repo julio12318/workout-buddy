@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recomFragment">
+    app:startDestination="@id/loadingFragment">
 
+    <!-- Fragments -->
     <fragment
         android:id="@+id/recomFragment"
         android:name="com.example.workoutbuddy.RecomFragment"
@@ -14,6 +15,7 @@
             android:id="@+id/action_recomFragment_to_exerciseSummaryFragment"
             app:destination="@id/exerciseSummaryFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/pastWorkoutFragment"
         android:name="com.example.workoutbuddy.PastWorkoutFragment"
@@ -23,6 +25,7 @@
             android:id="@+id/action_pastWorkoutFragment_to_pastWorkoutSummaryFragment"
             app:destination="@id/pastWorkoutSummaryFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/weeklyPlannerFragment"
         android:name="com.example.workoutbuddy.WeeklyPlannerFragment"
@@ -32,6 +35,7 @@
             android:id="@+id/action_weeklyPlannerFragment_to_dayPlanFragment"
             app:destination="@id/dayPlanFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/planFragment"
         android:name="com.example.workoutbuddy.PlanFragment"
@@ -41,6 +45,7 @@
             android:id="@+id/action_planFragment_to_chooseExerciseFragment"
             app:destination="@id/chooseExerciseFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.workoutbuddy.ProfileFragment"
@@ -53,6 +58,7 @@
             android:id="@+id/action_profileFragment_to_focusFragment"
             app:destination="@id/focusFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/exerciseSummaryFragment"
         android:name="com.example.workoutbuddy.ExerciseSummaryFragment"
@@ -62,34 +68,31 @@
             android:id="@+id/action_exerciseSummaryFragment_to_addExerciseFragment"
             app:destination="@id/addExerciseFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addExerciseFragment"
         android:name="com.example.workoutbuddy.AddExerciseFragment"
         android:label="fragment_add_exercise"
-        tools:layout="@layout/fragment_add_exercise" /><action android:id="@+id/action_global_recomFragment" app:destination="@id/recomFragment"/>
+        tools:layout="@layout/fragment_add_exercise" />
+
     <fragment
         android:id="@+id/pastWorkoutSummaryFragment"
         android:name="com.example.workoutbuddy.PastWorkoutSummaryFragment"
         android:label="fragment_past_workout_summary"
         tools:layout="@layout/fragment_past_workout_summary" />
+
     <fragment
         android:id="@+id/interviewFragment"
         android:name="com.example.workoutbuddy.InterviewFragment"
         android:label="fragment_interview"
-        tools:layout="@layout/fragment_interview" >
-        <action
-            android:id="@+id/action_interviewFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_interview" />
+
     <fragment
         android:id="@+id/focusFragment"
         android:name="com.example.workoutbuddy.FocusFragment"
         android:label="fragment_focus"
-        tools:layout="@layout/fragment_focus" >
-        <action
-            android:id="@+id/action_focusFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_focus" />
+
     <fragment
         android:id="@+id/chooseExerciseFragment"
         android:name="com.example.workoutbuddy.ChooseExerciseFragment"
@@ -99,15 +102,13 @@
             android:id="@+id/action_chooseExerciseFragment_to_quickSummaryFragment"
             app:destination="@id/quickSummaryFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/quickSummaryFragment"
         android:name="com.example.workoutbuddy.QuickSummaryFragment"
         android:label="fragment_quick_summary"
-        tools:layout="@layout/fragment_quick_summary" >
-        <action
-            android:id="@+id/action_quickSummaryFragment_to_planFragment"
-            app:destination="@id/planFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_quick_summary" />
+
     <fragment
         android:id="@+id/dayPlanFragment"
         android:name="com.example.workoutbuddy.DayPlanFragment"
@@ -117,9 +118,43 @@
             android:id="@+id/action_dayPlanFragment_to_completeFragment"
             app:destination="@id/completeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/completeFragment"
         android:name="com.example.workoutbuddy.CompleteFragment"
         android:label="fragment_complete"
-        tools:layout="@layout/fragment_complete" /><action android:id="@+id/action_global_pastWorkoutFragment" app:destination="@id/pastWorkoutFragment"/><action android:id="@+id/action_global_weeklyPlannerFragment" app:destination="@id/weeklyPlannerFragment"/><action android:id="@+id/action_global_planFragment" app:destination="@id/planFragment"/><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
+        tools:layout="@layout/fragment_complete" />
+
+    <!-- Global Actions -->
+    <action
+        android:id="@+id/action_global_recomFragment"
+        app:destination="@id/recomFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_global_pastWorkoutFragment"
+        app:destination="@id/pastWorkoutFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_global_weeklyPlannerFragment"
+        app:destination="@id/weeklyPlannerFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_global_planFragment"
+        app:destination="@id/planFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.example.workoutbuddy.LoadingFragment"
+        android:label="fragment_loading"
+        tools:layout="@layout/fragment_loading" />
+
 </navigation>

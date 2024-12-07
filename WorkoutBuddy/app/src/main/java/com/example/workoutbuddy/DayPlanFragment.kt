@@ -1,6 +1,7 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,7 @@ class DayPlanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments
         val time = bundle?.getLong("dayTime")!!
+        Log.d("OK, so we here", time.toString())
         val date = Date(time)
         val dateFormat = SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.getDefault())
         val formattedDate = dateFormat.format(date)
@@ -48,6 +50,7 @@ class DayPlanFragment : Fragment() {
 
         val click: (Exercise) -> Unit = { exercise ->
             val bundle = Bundle()
+            bundle.putString("exerciseID", exercise.id.toString())
             bundle.putString("bodyPart", exercise.bodyPart)
             bundle.putString("equipment", exercise.equipment)
             bundle.putString("gifUrl", exercise.gifUrl)
@@ -56,6 +59,7 @@ class DayPlanFragment : Fragment() {
             bundle.putString("secondaryMuscles", exercise.secondaryMuscles)
             bundle.putString("instructions", exercise.instructions)
             bundle.putSerializable("selectedDate", time)
+            Log.d("You clicked me!", time.toString())
 
             findNavController().navigate(R.id.action_dayPlanFragment_to_completeFragment, bundle)
         }

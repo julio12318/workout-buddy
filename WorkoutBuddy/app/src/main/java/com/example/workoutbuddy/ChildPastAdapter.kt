@@ -10,13 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ExerciseAdapter(
-    var exercisesList:ArrayList<APIWorkoutObject>,
-    var click: (APIWorkoutObject) -> Unit
-): RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>(){
+class ChildPastAdapter(
+    var exercisesList:ArrayList<CompletedExercises>,
+    var click: (CompletedExercises) -> Unit
+): RecyclerView.Adapter<ChildPastAdapter.ChildPastViewHolder>(){
 
-    class ExerciseViewHolder(val viewItem: View): RecyclerView.ViewHolder(viewItem){
-        fun bind(exercise:APIWorkoutObject, click:(APIWorkoutObject)->Unit){
+    class ChildPastViewHolder(val viewItem: View): RecyclerView.ViewHolder(viewItem){
+        fun bind(exercise:CompletedExercises, click: (CompletedExercises) -> Unit){
             viewItem.findViewById<TextView>(R.id.name_text).text=exercise.name
             viewItem.findViewById<TextView>(R.id.part_text).text=exercise.bodyPart
             val gifView = viewItem.findViewById<ImageView>(R.id.image)
@@ -27,16 +27,16 @@ class ExerciseAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildPastViewHolder {
         val viewItem= LayoutInflater.from(parent.context).inflate(R.layout.exercises_view, parent, false)
-        return ExerciseViewHolder(viewItem)
+        return ChildPastViewHolder(viewItem)
     }
 
     override fun getItemCount(): Int {
         return exercisesList.size
     }
 
-    override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ChildPastViewHolder, position: Int) {
         holder.bind(exercisesList[position], click)
     }
 }

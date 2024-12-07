@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -48,12 +50,12 @@ class QuickSummaryFragment : Fragment() {
 
         var secMuscles = ""
         for (muscle in group) {
-            secMuscles += muscle
+            secMuscles += "${muscle}\n"
         }
 
         var instruct = ""
         for (ins in instructions) {
-            instruct += ins
+            instruct += "${ins}\n"
         }
 
         val calendar = Calendar.getInstance()
@@ -78,6 +80,8 @@ class QuickSummaryFragment : Fragment() {
         view.findViewById<TextView>(R.id.exercise_group).text = secMuscles
         view.findViewById<TextView>(R.id.exercise_description).text = target
         view.findViewById<TextView>(R.id.exercise_instructions).text = instruct
+        val gifView = view.findViewById<ImageView>(R.id.exercise_image)
+        Glide.with(view.context).load(gifUrl).into(gifView)
 
         val timeFloat = updatedSendDate.time
 
@@ -95,7 +99,7 @@ class QuickSummaryFragment : Fragment() {
             exercise.instructions = instruct
             exercise.dateCreated = timeFloat
             viewModel.addExercise(exercise)
-            view.findNavController().navigate(R.id.action_quickSummaryFragment_to_planFragment)
+            view.findNavController().navigate(R.id.action_global_planFragment)
         }
 
     }

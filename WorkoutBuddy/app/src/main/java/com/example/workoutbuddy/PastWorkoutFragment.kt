@@ -1,10 +1,18 @@
 package com.example.workoutbuddy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +29,98 @@ class PastWorkoutFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var recyclerViewAdapter: ParentPastAdapter
+    lateinit var recyclerViewManager: LinearLayoutManager
+    lateinit var list_recyclerView: RecyclerView
+
+
+    val viewModel: WorkoutBuddyViewModel by activityViewModels()
+    private var previouslySelectedPosition: Int = 0
+
+    private var whichSort: Boolean = true
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("position", "${previouslySelectedPosition}")
+        Log.d("sorted", "${whichSort}")
+
+        val options = ArrayList<String>()
+        options.add("Date")
+        options.add("Part")
+        options.add("Rating")
+        setupSpinner(view, options)
+
+        val spinner = view.findViewById<Spinner>(R.id.spinner3)
+        val selectedString = spinner.selectedItem as String
+        viewModel.getQualities(selectedString)
+
+
+        val parents = viewModel.parentObjects.value!!
+        Log.d("parents", "${parents}")
+
+        val click: (CompletedExercises) -> Unit = { exercise ->
+            val bundle = Bundle()
+            bundle.putString("bodyPart", exercise.bodyPart)
+            bundle.putString("equipment", exercise.equipment)
+            bundle.putString("gifUrl", exercise.gifUrl)
+            bundle.putString("name", exercise.name)
+            bundle.putString("target", exercise.target)
+            bundle.putString("secondaryMuscles", exercise.secondaryMuscles)
+            bundle.putString("instructions", exercise.instructions)
+            bundle.putLong("selectedDate", exercise.dateCreated)
+
+            findNavController().navigate(R.id.action_pastWorkoutFragment_to_pastWorkoutSummaryFragment, bundle)
+        }
+
+        list_recyclerView = view.findViewById(R.id.titlerecyclerview)
+        recyclerViewManager = LinearLayoutManager(context)
+        recyclerViewAdapter = ParentPastAdapter(parents, whichSort, click)
+
+        viewModel.parentObjects.observe(viewLifecycleOwner) {
+            Log.d("This is the option!", "${previouslySelectedPosition}")
+            Log.d("This is the whichSort!", "${whichSort}")
+            recyclerViewAdapter.itemsList = it
+            recyclerViewAdapter.isDate = whichSort
+            recyclerViewAdapter.notifyDataSetChanged()
+        }
+
+        list_recyclerView.apply {
+            layoutManager = recyclerViewManager
+            adapter = recyclerViewAdapter
+        }
+    }
+
+    private fun setupSpinner(view: View, options: List<String>) {
+        val spinner = view.findViewById<Spinner>(R.id.spinner3)
+        val choices = ArrayList<String>()
+
+        for (option in options) {
+            choices.add(option)
+        }
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, choices)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Null check for the view parameter to prevent crashes
+                view?.let {
+                    val selectedItem = parent.getItemAtPosition(position).toString()
+                    previouslySelectedPosition = position
+                    if (previouslySelectedPosition == 0) {
+                        whichSort = true
+                    }
+                    else {
+                        whichSort = false
+                    }
+                    viewModel.getQualities(selectedItem)// Save the selected position
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,6 +135,12 @@ class PastWorkoutFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_past_workout, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val spinner = view?.findViewById<Spinner>(R.id.spinner3)
+        spinner?.setSelection(previouslySelectedPosition)
     }
 
     companion object {
