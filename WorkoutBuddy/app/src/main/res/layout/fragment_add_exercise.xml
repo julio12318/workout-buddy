@@ -18,6 +18,12 @@
             android:textSize="35sp"
             android:text="Add Exercise:" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
@@ -28,8 +34,8 @@
             android:id="@+id/date_to_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Add Exercise A to January 25, 2025:" />
+            android:text="Add Exercise A to January 25, 2025:"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/add_button"
@@ -44,14 +50,20 @@
             android:id="@+id/exercises_same_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Current Exercises on that date:" />
+            android:text="Current Exercises on that date:"
+            android:textSize="20sp" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/exercises_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="This is the List of Exercises" />
+            android:text="This is the List of Exercises"
+            android:textSize="20sp" />
     </LinearLayout>
 </ScrollView>
