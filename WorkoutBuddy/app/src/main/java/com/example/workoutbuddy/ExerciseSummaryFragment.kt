@@ -41,7 +41,7 @@ class ExerciseSummaryFragment : Fragment() {
 
         var secMuscles = ""
         for (muscle in secondaryMuscles) {
-            secMuscles += "${muscle}\n "
+            secMuscles += "${muscle} \n "
         }
 
         var instruct = ""
@@ -55,6 +55,8 @@ class ExerciseSummaryFragment : Fragment() {
 
         val bodyPartCap = "Body Part: ${bodyPart.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_part).text = bodyPartCap
+        val equipCap = "Equipment: ${equipment.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_equipment).text = equipCap
         val secMuscCap = "Additional Muslces:\n${secMuscles.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_group).text = secMuscCap
         val gifView = view.findViewById<ImageView>(R.id.exercise_image)

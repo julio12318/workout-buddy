@@ -30,12 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:text="This is the Name of the Exercise:" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="5dp"
             android:background="?android:attr/listDivider" />
 
         <ImageView
@@ -54,36 +56,61 @@
             android:id="@+id/exercise_part"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_target"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="TextView" />
+
+
+        <TextView
+            android:id="@+id/exercise_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_equipment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/exercise_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/media_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
             android:text="Add Media" />
 
         <Button
@@ -102,12 +129,16 @@
             android:id="@+id/experience_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:text="How Would You Rate Your Experience:" />
 
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
-            android:layout_height="48dp" />
+            android:layout_height="48dp"
+            android:textColor="@color/black"
+            android:background="#2BB130"/>
 
         <View
             android:id="@+id/divider2"
@@ -119,6 +150,8 @@
             android:id="@+id/recommended_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
             android:text="Would You Like It To Be Recommended Again?" />
 
         <RadioGroup
@@ -131,14 +164,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recommend" />
+                android:text="Recommend"
+                android:textColor="@color/black"/>
 
             <RadioButton
                 android:id="@+id/norecommend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Don't Recommend" />
+                android:text="Don't Recommend"
+                android:textColor="@color/black"/>
         </RadioGroup>
 
         <View
@@ -151,14 +186,33 @@
             android:id="@+id/time_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="How Long Did It Take?" />
+            android:textSize="20dp"
+            android:text="How Long Did It Take? (in minutes)"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/minutes_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="13dp"/>
+
+        <TextView
+            android:id="@+id/notes_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Any Additional Notes:"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/notes_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13dp"/>
 
         <Button
             android:id="@+id/submit_button"

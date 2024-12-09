@@ -42,8 +42,6 @@ class PastWorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("position", "${previouslySelectedPosition}")
-        Log.d("sorted", "${whichSort}")
 
         val options = ArrayList<String>()
         options.add("Date")
@@ -57,7 +55,6 @@ class PastWorkoutFragment : Fragment() {
 
 
         val parents = viewModel.parentObjects.value!!
-        Log.d("parents", "${parents}")
 
         val click: (CompletedExercises) -> Unit = { exercise ->
             val bundle = Bundle()
@@ -73,6 +70,7 @@ class PastWorkoutFragment : Fragment() {
             bundle.putString("minutes", exercise.minutes)
             bundle.putString("rating", exercise.rating)
             bundle.putString("imageURL", exercise.imageURL)
+            bundle.putString("notes", exercise.notes)
 
 
             findNavController().navigate(R.id.action_pastWorkoutFragment_to_pastWorkoutSummaryFragment, bundle)
@@ -83,8 +81,6 @@ class PastWorkoutFragment : Fragment() {
         recyclerViewAdapter = ParentPastAdapter(parents, whichSort, click)
 
         viewModel.parentObjects.observe(viewLifecycleOwner) {
-            Log.d("This is the option!", "${previouslySelectedPosition}")
-            Log.d("This is the whichSort!", "${whichSort}")
             recyclerViewAdapter.itemsList = it
             recyclerViewAdapter.isDate = whichSort
             recyclerViewAdapter.notifyDataSetChanged()

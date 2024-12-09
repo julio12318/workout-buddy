@@ -10,7 +10,6 @@ class WorkoutBuddyViewModel : ViewModel() {
 
     val database1 = MutableLiveData<ExerciseDB>()
     val database2 = MutableLiveData<CompletedExercisesDB>()
-    val database3 = MutableLiveData<WeeklyScheduleDB>()
     val database4 = MutableLiveData<UserDB>()
     val database5 = MutableLiveData<PreferencesDB>()
 
@@ -40,23 +39,19 @@ class WorkoutBuddyViewModel : ViewModel() {
 
     fun startExercises(method: String, attribute: String) {
         if (method == "part") {
-            Log.d("Gottem 2.6", attribute)
             apiManager.value?.fetchExercisesByBodyPart(attribute)
         }
 //        apiManager.value?.fetchExercisesByMuscle("serratus anterior");
     }
 
     fun getParts() {
-        Log.d("How Lucky", "Let's Go")
         apiManager.value?.fetchBodyParts()
-        Log.d("Announcement", "Body Parts Fetched!")
-        Log.d("Size", "Size of List: ${bodyParts.value?.size}")
 
     }
 
     fun addExercise(exercise: Exercise) {
         database1.value?.exerciseDAO()?.insert(exercise)
-        Log.d("Exercise Time", "${exercise.dateCreated}")
+
     }
 
     fun deleteExercise(id: UUID) {
@@ -72,13 +67,13 @@ class WorkoutBuddyViewModel : ViewModel() {
         val userList = database4.value?.userDAO()?.getAll()
         if (userList != null) {
             if (userList.isEmpty()) {
-                Log.d("List is Empty?", "List is for sure empty")
+
                 val newUser = User()
                 database4.value?.userDAO()?.insert(newUser)
                 user.value = newUser
             }
             else {
-                Log.d("List is Empty?", "List is for sure not empty")
+
                 val currentUser = userList[0]
                 user.value = currentUser
             }
@@ -89,14 +84,13 @@ class WorkoutBuddyViewModel : ViewModel() {
         val prefList = database5.value?.preferencesDAO()?.getPreferences(part)
         if (prefList != null) {
             if (prefList.isEmpty()) {
-                Log.d("Preferences Check", "${part} is not in list")
                 val newPreferences = Preferences()
                 newPreferences.name = part
                 newPreferences.isChecked = false
                 database5.value?.preferencesDAO()?.insert(newPreferences)
             }
             else {
-                Log.d("Preferences Check", "${part} is in the list")
+
             }
         }
     }
@@ -123,7 +117,6 @@ class WorkoutBuddyViewModel : ViewModel() {
     fun getWeekExercises(time: Long) {
         val exList = database1.value?.exerciseDAO()?.getDateEx(time)
         exercisesNames.value = (exList as ArrayList<Exercise>?)!!
-        Log.d("Getting Those Days!", "${exercisesNames.value}")
     }
 
     fun updateInitiate() {
@@ -133,7 +126,6 @@ class WorkoutBuddyViewModel : ViewModel() {
     fun addPoints() {
         val user = user.value!!
         val currentPoints = user.points
-        Log.d("Current Points", currentPoints.toString())
         database4.value?.userDAO()?.updatePoints(currentPoints + 100)
     }
 
@@ -143,7 +135,6 @@ class WorkoutBuddyViewModel : ViewModel() {
             val dates = (dateList as ArrayList<Long>?)!!
             val createParents = ArrayList<ParentItem>()
             for (date in dates){
-                Log.d("Long Date", "${date}")
                 val dateSt = date.toString()
                 val qualList = database2.value?.completedExercisesDAO()?.getDate(date)
                 val qL2 = (qualList as ArrayList<CompletedExercises>)

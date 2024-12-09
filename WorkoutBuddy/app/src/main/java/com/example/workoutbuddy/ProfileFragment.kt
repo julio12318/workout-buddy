@@ -35,7 +35,6 @@ class ProfileFragment : Fragment() {
 
         val curUser = viewModel.user.value
         view.findViewById<EditText>(R.id.name_text).setText(curUser?.name)
-        Log.d("Current Points", "${curUser?.points}")
         val level = (curUser?.points)!! / 100
         view.findViewById<TextView>(R.id.level_text).text = "Current Level: ${level}"
 

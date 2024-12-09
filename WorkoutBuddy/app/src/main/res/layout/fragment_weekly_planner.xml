@@ -1,164 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".WeeklyPlannerFragment"
+android:background="#D3D3D3">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3"
-    tools:context=".WeeklyPlannerFragment">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/week_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:layout_marginBottom="20dp"
+        android:text="Your Week"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:text="Let's Look At Your Workouts Today!"
+        android:padding="16dp"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:id="@+id/selection1">
 
-        <TextView
-            android:id="@+id/week_text"
+
+
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Your Week" />
+            android:layout_height="match_parent"
+            android:id="@+id/todayrecyclerview"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection1">
-
-            <TextView
-                android:id="@+id/day_text1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-            <TextView
-                android:id="@+id/exercises1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection2">
-
-            <TextView
-                android:id="@+id/day_text2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 2" />
-
-            <TextView
-                android:id="@+id/exercises2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection3">
-
-            <TextView
-                android:id="@+id/day_text3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 3" />
-
-            <TextView
-                android:id="@+id/exercises3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection4">
-
-            <TextView
-                android:id="@+id/day_text4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 4" />
-
-            <TextView
-                android:id="@+id/exercises4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection5">
-
-            <TextView
-                android:id="@+id/day_text5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 5" />
-
-            <TextView
-                android:id="@+id/exercises5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection6">
-
-            <TextView
-                android:id="@+id/day_text6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 6" />
-
-            <TextView
-                android:id="@+id/exercises6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/selection7">
-
-            <TextView
-                android:id="@+id/day_text7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 7" />
-
-            <TextView
-                android:id="@+id/exercises7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Day 1" />
-
-        </LinearLayout>
 
 
     </LinearLayout>
 
-</FrameLayout>
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/today_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:padding="16dp"
+        android:text="Let's Take a Sneek Peak at the Future!"
+        />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:id="@+id/selection2">
+
+        <TextView
+            android:id="@+id/day_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="Day 2" />
+
+        <TextView
+            android:id="@+id/exercises2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+            android:text="Day 1" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:id="@+id/selection3">
+
+        <TextView
+            android:id="@+id/day_text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="Day 3" />
+
+        <TextView
+            android:id="@+id/exercises3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:text="Day 1" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:id="@+id/selection4">
+
+        <TextView
+            android:id="@+id/day_text4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Day 4" />
+
+        <TextView
+            android:id="@+id/exercises4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:text="Day 1" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:id="@+id/selection5">
+
+        <TextView
+            android:id="@+id/day_text5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Day 5" />
+
+        <TextView
+            android:id="@+id/exercises5"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Day 1" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:id="@+id/selection6">
+
+        <TextView
+            android:id="@+id/day_text6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Day 6" />
+
+        <TextView
+            android:id="@+id/exercises6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:text="Day 1" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:id="@+id/selection7">
+
+        <TextView
+            android:id="@+id/day_text7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Day 7" />
+
+        <TextView
+            android:id="@+id/exercises7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:text="Day 1" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</ScrollView>

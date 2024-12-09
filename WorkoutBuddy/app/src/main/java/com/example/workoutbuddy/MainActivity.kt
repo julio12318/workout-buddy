@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         // Initialize the databases in ViewModel
         viewModel.database1.value = ExerciseDB.getDBObject(applicationContext)
         viewModel.database2.value = CompletedExercisesDB.getDBObject(applicationContext)
-        viewModel.database3.value = WeeklyScheduleDB.getDBObject(applicationContext)
         viewModel.database4.value = UserDB.getDBObject(applicationContext)
         viewModel.database5.value = PreferencesDB.getDBObject(applicationContext)
 
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         // Set up bottom navigation and fragment navigation
         findViewById<BottomNavigationView>(R.id.bottom_menu).setOnItemSelectedListener {
             if (it.itemId == R.id.to_rec_frag) {
-                Log.d("MainActivity", "Navigating to RecomFragment")
                 findNavController(R.id.frag).navigate(R.id.action_global_recomFragment)
                 return@setOnItemSelectedListener true
             } else if (it.itemId == R.id.to_past_frag) {

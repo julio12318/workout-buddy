@@ -62,7 +62,6 @@ class InterviewFragment : Fragment() {
             }
             var selection2 = view.findViewById<EditText>(R.id.editTextNumber).text.toString()
             if (user != null) {
-                Log.d("You Not Null", "WE")
                 viewModel.changeQuestions(selection1, selection2, user.name)
                 viewModel.startOrGetUser()
             }

@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Plan Your Routines:"
+            android:textColor="@color/black"
             android:textSize="30sp" />
 
         <View
@@ -29,7 +30,8 @@
         <CalendarView
             android:id="@+id/plan_calendar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#9ABF9B"/>
 
         <View
             android:id="@+id/divider2"
@@ -42,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Monday, January 1, 2025"
+            android:textColor="@color/black"
             android:textSize="25sp" />
 
         <Button

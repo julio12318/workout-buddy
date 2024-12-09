@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:text="Showing Exercises For..."
+            android:textColor="@color/black"
             android:padding="16dp"/>
         <View
             android:id="@+id/divider"

@@ -18,7 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="35sp"
+            android:textColor="@color/black"
             android:text="Choose Body Part You Want To Focus On:" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="?android:attr/listDivider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/part_recyclerview"

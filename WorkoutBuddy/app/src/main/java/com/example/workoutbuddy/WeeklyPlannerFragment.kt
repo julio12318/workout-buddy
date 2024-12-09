@@ -10,6 +10,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -30,14 +34,19 @@ class WeeklyPlannerFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var recyclerViewAdapter: WeekAdapter
+    lateinit var recyclerViewManager: GridLayoutManager
+    lateinit var list_recyclerView: RecyclerView
+
+
     val viewModel: WorkoutBuddyViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_YEAR, 1)
         val daysOfWeek = arrayOf(
-            R.id.day_text1 to R.id.exercises1,
             R.id.day_text2 to R.id.exercises2,
             R.id.day_text3 to R.id.exercises3,
             R.id.day_text4 to R.id.exercises4,
@@ -66,68 +75,58 @@ class WeeklyPlannerFragment : Fragment() {
             // Get exercises for the day
             viewModel.getWeekExercises(startTime)
             times.add(startTime)
-            val exercises = viewModel.exercisesNames.value?.joinToString("\n") { it.name } ?: ""
-            view.findViewById<TextView>(exercisesTextId).text = exercises
+            val exercises = viewModel.exercisesNames.value!!
+            var exerciseText = ""
+            for (exercise in exercises) {
+                exerciseText += "${exercise.name.split(" ").joinToString(" ") { it.capitalize() }} \n"
+            }
+
+            view.findViewById<TextView>(exercisesTextId).text = exerciseText
 
             // Move to the next day
             currentDate.add(Calendar.DAY_OF_YEAR, 1)
         }
 
-        view.findViewById<LinearLayout>(R.id.selection1).setOnClickListener {
-            val time = times[0]
-            viewModel.getWeekExercises(time)
+        val currentDate2 = Calendar.getInstance()
+        val dateFormat2 = SimpleDateFormat("EEEE", Locale.getDefault())
+        val dayName2 = dateFormat2.format(currentDate2.time)
+        Log.d("Day Name", dayName2)
+        val startTime2 = currentDate2.apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.timeInMillis
+        viewModel.getWeekExercises(startTime2)
+        val recyclerExercises = viewModel.exercisesNames.value!!
+
+        val click: (Exercise) -> Unit = { exercise ->
             val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            Log.d("Week Time", time.toString())
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
+            bundle.putString("exerciseID", exercise.id.toString())
+            bundle.putString("bodyPart", exercise.bodyPart)
+            bundle.putString("equipment", exercise.equipment)
+            bundle.putString("gifUrl", exercise.gifUrl)
+            bundle.putString("name", exercise.name)
+            bundle.putString("target", exercise.target)
+            bundle.putString("secondaryMuscles", exercise.secondaryMuscles)
+            bundle.putString("instructions", exercise.instructions)
+            bundle.putSerializable("selectedDate", startTime2)
+
+            findNavController().navigate(R.id.action_weeklyPlannerFragment_to_completeFragment, bundle)
         }
 
-        view.findViewById<LinearLayout>(R.id.selection2).setOnClickListener {
-            val time = times[1]
-            viewModel.getWeekExercises(time)
-            val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
+        list_recyclerView = view.findViewById(R.id.todayrecyclerview)
+        recyclerViewManager = GridLayoutManager(context, 2)
+        recyclerViewAdapter = WeekAdapter(recyclerExercises, click)
+
+        viewModel.exercisesNames.observe(viewLifecycleOwner) {
+            recyclerViewAdapter.weekList = it
+            recyclerViewAdapter.notifyDataSetChanged()
         }
 
-        view.findViewById<LinearLayout>(R.id.selection3).setOnClickListener {
-            val time = times[2]
-            viewModel.getWeekExercises(time)
-            val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
-        }
-
-        view.findViewById<LinearLayout>(R.id.selection4).setOnClickListener {
-            val time = times[3]
-            viewModel.getWeekExercises(time)
-            val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
-        }
-
-        view.findViewById<LinearLayout>(R.id.selection5).setOnClickListener {
-            val time = times[4]
-            viewModel.getWeekExercises(time)
-            val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
-        }
-
-        view.findViewById<LinearLayout>(R.id.selection6).setOnClickListener {
-            val time = times[5]
-            viewModel.getWeekExercises(time)
-            val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
-        }
-
-        view.findViewById<LinearLayout>(R.id.selection7).setOnClickListener {
-            val time = times[6]
-            viewModel.getWeekExercises(time)
-            val bundle = Bundle()
-            bundle.putLong("dayTime", time)
-            view.findNavController().navigate(R.id.action_weeklyPlannerFragment_to_dayPlanFragment, bundle)
+        list_recyclerView.apply {
+            layoutManager = recyclerViewManager
+            adapter = recyclerViewAdapter
         }
 
     }

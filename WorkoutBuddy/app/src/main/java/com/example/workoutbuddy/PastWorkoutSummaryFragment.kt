@@ -47,8 +47,8 @@ class PastWorkoutSummaryFragment : Fragment() {
         val rating = bundle.getString("rating")
         val minutes = bundle.getString("minutes")
         val imageURL = bundle.getString("imageURL")
+        val notes = bundle.getString("notes")
 
-        Log.d("Gotcha Image", imageURL!!)
 
         val dateFormat = SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.getDefault())
         val formattedDate = dateFormat.format(date)
@@ -68,22 +68,24 @@ class PastWorkoutSummaryFragment : Fragment() {
 
         val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_name).text = nameCap
-        val partCap = "${part.split(" ").joinToString(" ") { it.capitalize() }}"
-        view.findViewById<TextView>(R.id.exercise_part).text = partCap
-        val groupCap = "${group.split(" ").joinToString(" ") { it.capitalize() }}"
-        view.findViewById<TextView>(R.id.exercise_group).text = groupCap
-        val targetCap = "${target.split(" ").joinToString(" ") { it.capitalize() }}"
+        val bodyPartCap = "Body Part: ${part.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_part).text = bodyPartCap
+        val equipCap = "Equipment: ${equipment.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_equipment).text = equipCap
+        val secMuscCap = "Additional Muslces:\n${group.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_group).text = secMuscCap
+        val targetCap = "Targeted Muscle:\n${target.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_description).text = targetCap
-        val instructCap = "${instructions.split(" ").joinToString(" ") { it.capitalize() }}"
-        view.findViewById<TextView>(R.id.exercise_instructions).text = instructCap
-        view.findViewById<TextView>(R.id.exercise_rating).text = "Rating: $rating}"
+        view.findViewById<TextView>(R.id.exercise_instructions).text = "Instructions:\n${instructions}"
+        view.findViewById<TextView>(R.id.exercise_rating).text = "Rating: $rating"
         view.findViewById<TextView>(R.id.exercise_time).text = "You Worked Out for ${minutes} minutes"
         if (recommend) {
-            view.findViewById<TextView>(R.id.exercise_recommend).text = "Recommend"
+            view.findViewById<TextView>(R.id.exercise_recommend).text = "Did You Like It?: Recommend"
         }
         else {
-            view.findViewById<TextView>(R.id.exercise_recommend).text = "Don't Recommend"
+            view.findViewById<TextView>(R.id.exercise_recommend).text = "Did You Like It?: Don't Recommend"
         }
+        view.findViewById<TextView>(R.id.notes_text).text = notes
 
     }
 

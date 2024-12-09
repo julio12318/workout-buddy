@@ -39,15 +39,12 @@ class FocusFragment : Fragment() {
 
 
         val partList = viewModel.bodyParts.value!!
-        Log.d("Cool Beans 3", "${partList.size}")
         for (part in partList) {
-            Log.d("Made it to Phase 1", "part")
             viewModel.getPreferences(part)
         }
         viewModel.getAllPreferences()
 
         val bodyPartList = viewModel.bodyPartList.value!!
-        Log.d("Preference List Size", "${bodyPartList.size}")
 
 
         list_recyclerView=view.findViewById<RecyclerView>(R.id.part_recyclerview)

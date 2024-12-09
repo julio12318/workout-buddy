@@ -79,7 +79,6 @@ class PlanFragment : Fragment() {
                     putSerializable("selectedDate", date.time) // Put the Date object
                 }
 
-                Log.d("PlanFragment", "Passing selectedDate: ${date.time}")
                 view.findNavController().navigate(R.id.action_planFragment_to_chooseExerciseFragment, bundle)
             } ?: run {
                 Toast.makeText(requireContext(), "Please select a date first", Toast.LENGTH_SHORT).show()

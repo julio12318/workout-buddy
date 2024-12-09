@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:text="" />
 
         <TextView
@@ -24,12 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:text="This is the Name of the Exercise:" />
 
         <View
             android:id="@+id/divider4"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="5dp"
             android:background="?android:attr/listDivider" />
 
         <ImageView
@@ -48,42 +51,100 @@
             android:id="@+id/exercise_part"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
+
+        <TextView
+            android:id="@+id/exercise_equipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/exercise_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_recommend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/exercise_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/notes_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
+            android:text="Additional Notes:" />
+
+        <TextView
+            android:id="@+id/notes_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
     </LinearLayout>

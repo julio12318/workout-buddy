@@ -50,12 +50,12 @@ class QuickSummaryFragment : Fragment() {
 
         var secMuscles = ""
         for (muscle in group) {
-            secMuscles += "${muscle}\n "
+            secMuscles += "${muscle} \n"
         }
 
         var instruct = ""
         for (ins in instructions) {
-            instruct += "${ins}\n "
+            instruct += "${ins} \n"
         }
 
         val calendar = Calendar.getInstance()
@@ -75,11 +75,18 @@ class QuickSummaryFragment : Fragment() {
 
         view.findViewById<TextView>(R.id.exercise_date).text = "Choose Exercise For: ${formattedDate}"
 
-        view.findViewById<TextView>(R.id.exercise_name).text = name
-        view.findViewById<TextView>(R.id.exercise_part).text = part
-        view.findViewById<TextView>(R.id.exercise_group).text = secMuscles
-        view.findViewById<TextView>(R.id.exercise_description).text = target
-        view.findViewById<TextView>(R.id.exercise_instructions).text = instruct
+        val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_name).text = nameCap
+        val bodyPartCap = "Body Part: ${part.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_part).text = bodyPartCap
+        val equipCap = "Equipment: ${equipment.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_equipment).text = equipCap
+        val targetCap = "Targeted Muscle:\n${target.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_target).text = targetCap
+        val secMuscCap = "Additional Muslces:\n${secMuscles.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_group).text = secMuscCap
+        view.findViewById<TextView>(R.id.exercise_instructions).text = "Instructions: \n${instruct}"
+
         val gifView = view.findViewById<ImageView>(R.id.exercise_image)
         Glide.with(view.context).load(gifUrl).into(gifView)
 

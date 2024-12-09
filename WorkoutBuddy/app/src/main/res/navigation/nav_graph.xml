@@ -32,8 +32,8 @@
         android:label="fragment_weekly_planner"
         tools:layout="@layout/fragment_weekly_planner" >
         <action
-            android:id="@+id/action_weeklyPlannerFragment_to_dayPlanFragment"
-            app:destination="@id/dayPlanFragment" />
+            android:id="@+id/action_weeklyPlannerFragment_to_completeFragment"
+            app:destination="@id/completeFragment" />
     </fragment>
 
     <fragment
@@ -108,16 +108,6 @@
         android:name="com.example.workoutbuddy.QuickSummaryFragment"
         android:label="fragment_quick_summary"
         tools:layout="@layout/fragment_quick_summary" />
-
-    <fragment
-        android:id="@+id/dayPlanFragment"
-        android:name="com.example.workoutbuddy.DayPlanFragment"
-        android:label="fragment_day_plan"
-        tools:layout="@layout/fragment_day_plan" >
-        <action
-            android:id="@+id/action_dayPlanFragment_to_completeFragment"
-            app:destination="@id/completeFragment" />
-    </fragment>
 
     <fragment
         android:id="@+id/completeFragment"

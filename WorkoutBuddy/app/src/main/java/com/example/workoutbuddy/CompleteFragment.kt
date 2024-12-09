@@ -70,23 +70,21 @@ class CompleteFragment : Fragment() {
         val instructions = bundle.getString("instructions")!!
         val time = bundle.getLong("selectedDate")!!
 
-        Log.d("You Ready to finish this!", "${time}")
 
         // Set values to the views
         val nameCap = "${name.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_name).text = nameCap
-        val partCap = "${part.split(" ").joinToString(" ") { it.capitalize() }}"
-        view.findViewById<TextView>(R.id.exercise_part).text = partCap
-        val equipCap = "${equipment.split(" ").joinToString(" ") { it.capitalize() }}"
+        val bodyPartCap = "Body Part: ${part.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_part).text = bodyPartCap
+        val equipCap = "Equipment: ${equipment.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_equipment).text = equipCap
-        val targetCap = "${target.split(" ").joinToString(" ") { it.capitalize() }}"
+        val targetCap = "Targeted Muscle:\n${target.split(" ").joinToString(" ") { it.capitalize() }}"
         view.findViewById<TextView>(R.id.exercise_target).text = targetCap
         val gifView = view.findViewById<ImageView>(R.id.exercise_image)
         Glide.with(view.context).load(gifUrl).into(gifView)
-        val secMusclesCap= "${secondaryMuscles.split(" ").joinToString(" ") { it.capitalize() }}"
-        view.findViewById<TextView>(R.id.exercise_second).text = secMusclesCap
-        val instructCap = "${part.split(" ").joinToString(" ") { it.capitalize() }}"
-        view.findViewById<TextView>(R.id.exercise_instructions).text = instructCap
+        val secMuscCap = "Additional Muslces:\n${secondaryMuscles.split(" ").joinToString(" ") { it.capitalize() }}"
+        view.findViewById<TextView>(R.id.exercise_second).text = secMuscCap
+        view.findViewById<TextView>(R.id.exercise_instructions).text = "Instructions: \n${instructions}"
 
         setupSpinner(view, options)
 
@@ -133,6 +131,9 @@ class CompleteFragment : Fragment() {
             val min = view.findViewById<EditText>(R.id.minutes_text).text.toString()
             completedExercise.minutes = min
 
+            val notes = view.findViewById<EditText>(R.id.notes_text).text.toString()
+            completedExercise.notes = notes
+
             viewModel.addCompletedExercise(completedExercise)
             viewModel.deleteExercise(exID)
             viewModel.addPoints()
@@ -175,7 +176,6 @@ class CompleteFragment : Fragment() {
             val imageView = view?.findViewById<ImageView>(R.id.exercise_image2)
 
             if (imageView != null && selectedImageUri != null) {
-                Log.d("This is the Image", "${selectedImageUri}")
                 Glide.with(requireContext()).load(selectedImageUri).into(imageView)
             }
         }

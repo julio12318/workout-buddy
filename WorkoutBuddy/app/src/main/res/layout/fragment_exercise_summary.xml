@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="This is the Name of the Exercise:" />
 
 
@@ -44,7 +45,8 @@
             android:text="TextView"
             android:textSize="20dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/exercise_description"
@@ -53,7 +55,8 @@
             android:text="TextView"
             android:textSize="20dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/exercise_group"
@@ -62,7 +65,18 @@
             android:text="TextView"
             android:textSize="20dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/exercise_equipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
 
 
         <TextView
@@ -72,13 +86,15 @@
             android:text="TextView"
             android:textSize="20dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/add_future_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:text="Would You Like to Add to a Future Workout?" />
 
         <Button

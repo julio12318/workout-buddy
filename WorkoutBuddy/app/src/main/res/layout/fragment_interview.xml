@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:text="Interview Questions:" />
 
         <View
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:text="How often do you workout currently?" />
 
         <RadioGroup
@@ -48,18 +50,21 @@
                 android:id="@+id/once_a_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Once a Week" />
 
             <RadioButton
                 android:id="@+id/twice_a_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Twice a Week" />
 
             <RadioButton
                 android:id="@+id/more_a_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="More Than Twice a Week" />
         </RadioGroup>
 
@@ -67,6 +72,9 @@
             android:id="@+id/question_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
             android:text="How much can you lift? (lbs)" />
 
         <EditText
@@ -74,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColor="@color/black"
             android:inputType="number" />
 
         <Button

@@ -39,15 +39,12 @@ class RecomFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val partList = viewModel.bodyParts.value!!
-        Log.d("Cool Beans 3", "${partList.size}")
         for (part in partList) {
-            Log.d("Made it to Phase 1", "part")
             viewModel.getPreferences(part)
         }
         viewModel.getAllPreferences()
 
         val prefList = viewModel.bodyPartList.value!!
-        Log.d("Gottem 1", "${prefList.size}")
         val randomNumbers = mutableSetOf<Int>()
 
 
@@ -66,9 +63,7 @@ class RecomFragment : Fragment() {
             prefListRecom.add(prefList[index])
         }
 
-        Log.d("Gottem 2", "${prefListRecom.size}")
 
-        Log.d("Gottem 2.5", "${prefListRecom[0].name}")
 
         if (prefListRecom[0].isChecked) {
             val name = prefListRecom[0].name
@@ -88,7 +83,7 @@ class RecomFragment : Fragment() {
 
         viewModel.requestedWorkouts.observe(viewLifecycleOwner) {
             var recomExercises = viewModel.requestedWorkouts.value!!
-            Log.d("Gottem 3", "${recomExercises.size}")
+
 
 
             val randomNumbers2 = mutableSetOf<Int>()
@@ -103,7 +98,7 @@ class RecomFragment : Fragment() {
             for (index in randomNumbers2) {
                 specList.add(recomExercises[index])
             }
-            Log.d("Gottem 3.5", "${specList}")
+
 
             val click: (APIWorkoutObject) -> Unit = { exercise ->
                 val bundle = Bundle()
