@@ -39,13 +39,14 @@ class WorkoutBuddyViewModel : ViewModel() {
 
     fun startExercises(method: String, attribute: String) {
         if (method == "part") {
-            apiManager.value?.fetchExercisesByBodyPart(attribute)
+            // apiManager.value?.fetchExercisesByBodyPart(attribute)
+            apiManager.value?.fetchExercisesByBodyPart(attribute, 30, 0)
         }
 //        apiManager.value?.fetchExercisesByMuscle("serratus anterior");
     }
 
     fun getParts() {
-        apiManager.value?.fetchBodyParts()
+        apiManager.value?.fetchBodyParts(10, 0)
 
     }
 
