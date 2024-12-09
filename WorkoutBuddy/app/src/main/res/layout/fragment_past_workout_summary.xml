@@ -26,6 +26,12 @@
             android:textSize="30sp"
             android:text="This is the Name of the Exercise:" />
 
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
         <ImageView
             android:id="@+id/exercise_image"
             android:layout_width="match_parent"

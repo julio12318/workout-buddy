@@ -44,10 +44,13 @@
             android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add"
             android:backgroundTint="#98ff98"
+            android:drawableRight="@android:drawable/ic_input_add"
+            android:drawableTint="@android:color/black"
+            android:text="Add"
             android:textColor="#000000"
-            app:cornerRadius="0dp" />
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
 
         <TextView
             android:id="@+id/exercises_same_date"

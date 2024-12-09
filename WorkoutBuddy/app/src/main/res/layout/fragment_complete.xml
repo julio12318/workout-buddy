@@ -90,10 +90,13 @@
             android:id="@+id/media_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Media"
             android:backgroundTint="#98ff98"
+            android:drawableRight="@android:drawable/ic_menu_camera"
+            android:drawableTint="@android:color/black"
+            android:text="Add Media"
             android:textColor="#000000"
-            app:cornerRadius="0dp"/>
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
 
         <TextView
             android:id="@+id/experience_text"
@@ -105,6 +108,12 @@
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
             android:layout_height="48dp" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/recommended_text"
@@ -132,6 +141,12 @@
                 android:text="Don't Recommend" />
         </RadioGroup>
 
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
         <TextView
             android:id="@+id/time_text"
             android:layout_width="match_parent"
@@ -149,6 +164,8 @@
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit"/>
+            android:text="Submit"
+            android:backgroundTint="#98ff98"
+            android:textColor="#000000"/>
     </LinearLayout>
 </ScrollView>
