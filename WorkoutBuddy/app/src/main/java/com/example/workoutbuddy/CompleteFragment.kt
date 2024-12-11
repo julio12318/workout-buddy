@@ -95,50 +95,52 @@ class CompleteFragment : Fragment() {
 
         // Submit button functionality
         view.findViewById<Button>(R.id.submit_button).setOnClickListener {
-            val completedExercise = CompletedExercises()
-            completedExercise.bodyPart = part
-            completedExercise.equipment = equipment
-            completedExercise.gifUrl = gifUrl
-            completedExercise.name = name
-            completedExercise.target = target
-            completedExercise.secondaryMuscles = secondaryMuscles
-            completedExercise.instructions = instructions
-            completedExercise.dateCreated = time
-            completedExercise.imageURL = selectedImageUri!!
-            if (selectedRating == 0) {
-                completedExercise.rating = "Poor"
-                completedExercise.ratingNum = 5
-            } else if (selectedRating == 1) {
-                completedExercise.rating = "Below Average"
-                completedExercise.ratingNum = 4
-            } else if (selectedRating == 2) {
-                completedExercise.rating = "Average"
-                completedExercise.ratingNum = 3
-            } else if (selectedRating == 3) {
-                completedExercise.rating = "Above Average"
-                completedExercise.ratingNum = 2
-            } else if (selectedRating == 4) {
-                completedExercise.rating = "Excellent"
-                completedExercise.ratingNum = 1
+            if (selectedImageUri != null) {
+                val completedExercise = CompletedExercises()
+                completedExercise.bodyPart = part
+                completedExercise.equipment = equipment
+                completedExercise.gifUrl = gifUrl
+                completedExercise.name = name
+                completedExercise.target = target
+                completedExercise.secondaryMuscles = secondaryMuscles
+                completedExercise.instructions = instructions
+                completedExercise.dateCreated = time
+                completedExercise.imageURL = selectedImageUri!!
+                if (selectedRating == 0) {
+                    completedExercise.rating = "Poor"
+                    completedExercise.ratingNum = 5
+                } else if (selectedRating == 1) {
+                    completedExercise.rating = "Below Average"
+                    completedExercise.ratingNum = 4
+                } else if (selectedRating == 2) {
+                    completedExercise.rating = "Average"
+                    completedExercise.ratingNum = 3
+                } else if (selectedRating == 3) {
+                    completedExercise.rating = "Above Average"
+                    completedExercise.ratingNum = 2
+                } else if (selectedRating == 4) {
+                    completedExercise.rating = "Excellent"
+                    completedExercise.ratingNum = 1
+                }
+
+                if (view.findViewById<RadioButton>(R.id.recommend).isChecked) {
+                    completedExercise.recommend = true
+                } else if (view.findViewById<RadioButton>(R.id.norecommend).isChecked) {
+                    completedExercise.recommend = false
+                }
+
+                val min = view.findViewById<EditText>(R.id.minutes_text).text.toString()
+                completedExercise.minutes = min
+
+                val notes = view.findViewById<EditText>(R.id.notes_text).text.toString()
+                completedExercise.notes = notes
+
+                viewModel.addCompletedExercise(completedExercise)
+                viewModel.deleteExercise(exID)
+                viewModel.addPoints()
+                viewModel.startOrGetUser()
+                findNavController().navigate(R.id.action_global_weeklyPlannerFragment)
             }
-
-            if (view.findViewById<RadioButton>(R.id.recommend).isChecked) {
-                completedExercise.recommend = true
-            } else if (view.findViewById<RadioButton>(R.id.norecommend).isChecked) {
-                completedExercise.recommend = false
-            }
-
-            val min = view.findViewById<EditText>(R.id.minutes_text).text.toString()
-            completedExercise.minutes = min
-
-            val notes = view.findViewById<EditText>(R.id.notes_text).text.toString()
-            completedExercise.notes = notes
-
-            viewModel.addCompletedExercise(completedExercise)
-            viewModel.deleteExercise(exID)
-            viewModel.addPoints()
-            viewModel.startOrGetUser()
-            findNavController().navigate(R.id.action_global_weeklyPlannerFragment)
         }
     }
 
